@@ -19,7 +19,7 @@ const PortfolioSection = () => {
       image: keepMacAwakeImg,
       tags: ["Python", "macOS", "Desktop App", "Native Development"],
       links: {
-        live: "#",
+        live: "https://keepmacawake.netlify.app/",
         github: "#",
         download: "#"
       },
@@ -64,7 +64,7 @@ const PortfolioSection = () => {
       image: birthdayReminderImg,
       tags: ["iOS Shortcuts", "Automation", "Mobile", "Problem Solving"],
       links: {
-        download: "#"
+        download: "https://routinehub.co/shortcut/22480/"
       },
       status: "Live",
       downloads: "114+"

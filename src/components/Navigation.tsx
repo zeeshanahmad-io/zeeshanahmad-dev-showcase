@@ -1,124 +1,164 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Download, Menu, X } from 'lucide-react';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Navigation = () => {
-  const [activeSection, setActiveSection] = useState('home');
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'portfolio', label: 'Portfolio' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'contact', label: 'Contact' }
-  ];
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      // Update active section based on scroll position
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-
-      sections.forEach((section, index) => {
-        if (section) {
-          const sectionTop = section.offsetTop;
-          const sectionBottom = sectionTop + section.offsetHeight;
-          
-          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-            setActiveSection(navItems[index].id);
-          }
-        }
-      });
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
+  const navItems = [
+    { name: 'Home', href: '#home', route: '/' },
+    { name: 'About', href: '#about', route: '/' },
+    { name: 'Experience', href: '#experience', route: '/' },
+    { name: 'Portfolio', href: '#portfolio', route: '/' },
+    { name: 'Blog', href: '/blog', route: '/blog' },
+    { name: 'Contact', href: '#contact', route: '/' }
+  ];
+
+  const scrollToSection = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
-    setIsMobileMenuOpen(false);
+    setIsOpen(false);
   };
 
-  const handleDownloadResume = () => {
-    // This would typically trigger a download of the resume PDF
-    console.log('Download resume clicked');
+  const handleNavClick = (item: typeof navItems[0]) => {
+    if (item.route && item.route !== '/') {
+      // External route - don't scroll
+      setIsOpen(false);
+    } else {
+      // Same page scroll
+      scrollToSection(item.href);
+    }
   };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/95 backdrop-blur-md border-b border-border' : 'bg-transparent'
+      scrolled ? 'bg-background/95 backdrop-blur-md border-b border-border' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="text-2xl font-bold text-gradient-primary">
-            Zeeshan Ahmad
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Download Resume Button */}
-          <div className="hidden md:block">
-            <Button
-              onClick={handleDownloadResume}
-              className="btn-hero"
-            >
-              <Download className="w-4 h-4 mr-2" />
-              Download Resume
-            </Button>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-foreground hover:text-primary transition-colors"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+        {/* Logo */}
+        <div className="flex items-center">
+          <Link to="/" className="text-2xl font-bold text-gradient-accent hover:opacity-80 transition-opacity">
+            ZA
+          </Link>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-border">
-            <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`nav-link text-left ${activeSection === item.id ? 'active' : ''}`}
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          {navItems.map((item) => {
+            if (item.route && item.route !== '/') {
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
                 >
-                  {item.label}
+                  {item.name}
+                </Link>
+              );
+            }
+            return (
+              <button
+                key={item.name}
+                onClick={() => handleNavClick(item)}
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+              >
+                {item.name}
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Action Buttons */}
+        <div className="hidden md:flex items-center space-x-4">
+          <ThemeToggle />
+          <Button 
+            className="btn-hero"
+            onClick={() => {
+              // Handle resume download
+              window.open('/resume.pdf', '_blank');
+            }}
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Resume
+          </Button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center space-x-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 bg-background/95 backdrop-blur-sm border-t border-border">
+            {navItems.map((item) => {
+              if (item.route && item.route !== '/') {
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                );
+              }
+              return (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item)}
+                  className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors font-medium w-full text-left"
+                >
+                  {item.name}
                 </button>
-              ))}
-              <Button
-                onClick={handleDownloadResume}
-                className="btn-hero w-full mt-4"
+              );
+            })}
+            <div className="px-3 py-2">
+              <Button 
+                className="btn-hero w-full"
+                onClick={() => {
+                  window.open('/resume.pdf', '_blank');
+                  setIsOpen(false);
+                }}
               >
                 <Download className="w-4 h-4 mr-2" />
-                Download Resume
+                Resume
               </Button>
             </div>
           </div>
-        )}
+        </div>
+      )}
       </div>
     </nav>
   );
