@@ -2,41 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Zeeshan Ahmad Portfolio - Professional Dark Theme Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Dark Professional Color Palette */
+    --background: 222 15% 7%;           /* Deep charcoal background */
+    --foreground: 210 20% 95%;          /* Crisp white text */
+    
+    --card: 222 15% 10%;                /* Slightly lighter card background */
+    --card-foreground: 210 20% 95%;     /* White card text */
+    
+    --popover: 222 15% 10%;
+    --popover-foreground: 210 20% 95%;
+    
+    /* Brand Colors - Electric Cyan Primary */
+    --primary: 187 100% 65%;            /* Vibrant electric cyan */
+    --primary-foreground: 222 15% 7%;   /* Dark text on cyan */
+    --primary-glow: 187 100% 75%;       /* Lighter cyan for glow effects */
+    
+    /* Purple Accent for Secondary Actions */
+    --secondary: 267 83% 58%;           /* Electric purple */
+    --secondary-foreground: 210 20% 95%; /* White text on purple */
+    
+    /* Subtle Grays for Muted Content */
+    --muted: 220 13% 18%;               /* Dark gray for subtle backgrounds */
+    --muted-foreground: 215 16% 65%;    /* Mid-gray for secondary text */
+    
+    /* Accent Colors */
+    --accent: 187 100% 65%;             /* Same as primary for consistency */
+    --accent-foreground: 222 15% 7%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 95%;
+    
+    /* Borders and Inputs */
+    --border: 220 13% 25%;              /* Subtle border color */
+    --input: 220 13% 18%;               /* Input background */
+    --ring: 187 100% 65%;               /* Focus ring color */
+    
+    /* Design System Extensions */
+    --nav-background: 222 15% 7% / 0.95; /* Semi-transparent nav */
+    --hero-gradient: linear-gradient(135deg, hsl(222 15% 7%), hsl(220 13% 10%));
+    --card-gradient: linear-gradient(145deg, hsl(222 15% 10%), hsl(220 13% 12%));
+    --accent-gradient: linear-gradient(135deg, hsl(187 100% 65%), hsl(267 83% 58%));
+    --glow-primary: 0 0 30px hsl(187 100% 65% / 0.3);
+    --glow-secondary: 0 0 20px hsl(267 83% 58% / 0.2);
+    
+    /* Spacing and Typography */
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -94,6 +108,7 @@ All colors MUST be HSL.
   }
 }
 
+/* Portfolio-specific animations and utilities */
 @layer base {
   * {
     @apply border-border;
@@ -101,5 +116,95 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-glow));
+  }
+}
+
+@layer components {
+  /* Hero section styles */
+  .hero-title {
+    @apply text-5xl md:text-7xl font-bold bg-gradient-to-r from-foreground via-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .hero-subtitle {
+    @apply text-xl md:text-2xl text-muted-foreground font-light;
+  }
+
+  /* Navigation styles */
+  .nav-link {
+    @apply relative px-4 py-2 text-foreground hover:text-primary transition-all duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-primary after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .nav-link.active {
+    @apply text-primary after:w-full;
+  }
+
+  /* Card styles */
+  .portfolio-card {
+    @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-card to-muted border border-border hover:border-primary/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl;
+  }
+
+  .portfolio-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 transition-opacity duration-300;
+  }
+
+  .portfolio-card:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Experience timeline */
+  .timeline-item {
+    @apply relative pl-8 border-l-2 border-border hover:border-primary transition-colors duration-300;
+  }
+
+  .timeline-item::before {
+    content: '';
+    @apply absolute -left-2 top-0 w-4 h-4 bg-primary rounded-full border-4 border-background;
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-secondary {
+    box-shadow: var(--glow-secondary);
+  }
+
+  /* Text gradients */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent;
+  }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent;
+  }
+
+  /* Button variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-secondary hover:from-primary-glow hover:to-secondary text-primary-foreground font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 glow-primary;
+  }
+
+  .btn-outline-glow {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:glow-primary;
   }
 }
