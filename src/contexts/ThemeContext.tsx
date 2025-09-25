@@ -23,14 +23,23 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme');
-    return (stored as Theme) || 'dark';
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      return (stored as Theme) || 'dark';
+    }
+    return 'dark';
   });
 
   useEffect(() => {
     const root = window.document.documentElement;
+    
+    // Remove both theme classes first
     root.classList.remove('light', 'dark');
+    
+    // Add the current theme class
     root.classList.add(theme);
+    
+    // Store in localStorage
     localStorage.setItem('theme', theme);
   }, [theme]);
 

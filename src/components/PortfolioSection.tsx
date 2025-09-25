@@ -81,11 +81,17 @@ const PortfolioSection = () => {
   };
 
   return (
-    <section id="portfolio" className="py-20">
-      <div className="container mx-auto px-6">
+    <section id="portfolio" className="py-20 relative overflow-hidden">
+      {/* Parallax Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 right-20 w-36 h-36 bg-primary/5 rounded-full blur-2xl parallax-slow"></div>
+        <div className="absolute bottom-10 left-20 w-52 h-52 bg-secondary/5 rounded-full blur-2xl parallax-fast"></div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient-accent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient-accent parallax-medium">
             Featured Projects & Ventures
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
