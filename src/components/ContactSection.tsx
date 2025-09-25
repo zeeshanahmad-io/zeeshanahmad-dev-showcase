@@ -35,21 +35,23 @@ const ContactSection = () => {
   ];
 
   const handleDownloadResume = () => {
-    window.open('/resume.pdf', '_blank');
+    window.open('https://example.com/zeeshan-ahmad-resume.pdf', '_blank');
   };
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
-      {/* Parallax Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-44 h-44 bg-primary/5 rounded-full blur-2xl parallax-medium"></div>
-        <div className="absolute bottom-20 right-10 w-56 h-56 bg-secondary/5 rounded-full blur-2xl parallax-slow"></div>
-      </div>
-      
-      <div className="container mx-auto px-6 relative z-10">
+      {/* Add padding to account for fixed header */}
+      <div className="pt-20">
+        {/* Parallax Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-44 h-44 bg-primary/5 rounded-full blur-2xl parallax-medium"></div>
+          <div className="absolute bottom-20 right-10 w-56 h-56 bg-secondary/5 rounded-full blur-2xl parallax-slow"></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient-accent parallax-fast">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient-accent">
             Let's Connect & Collaborate
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -154,6 +156,7 @@ const ContactSection = () => {
               <Mail className="w-5 h-5" />
             </a>
           </div>
+        </div>
         </div>
       </div>
     </section>

@@ -4,13 +4,20 @@ import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 
 const HeroSection = () => {
   const handleDownloadResume = () => {
-    console.log('Download resume clicked');
+    window.open('https://example.com/zeeshan-ahmad-resume.pdf', '_blank');
   };
 
   const scrollToAbout = () => {
-    const aboutSection = document.getElementById('about');
+    const aboutSection = document.getElementById('about') as HTMLElement;
     if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = aboutSection.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 

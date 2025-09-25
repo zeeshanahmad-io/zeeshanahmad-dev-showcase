@@ -33,9 +33,16 @@ const Navigation = () => {
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
-      const element = document.querySelector(href);
+      const element = document.querySelector(href) as HTMLElement;
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const headerOffset = 80; // Account for fixed header
+        const elementPosition = element.offsetTop;
+        const offsetPosition = elementPosition - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       }
     }
     setIsOpen(false);
@@ -96,8 +103,7 @@ const Navigation = () => {
           <Button 
             className="btn-hero"
             onClick={() => {
-              // Handle resume download
-              window.open('/resume.pdf', '_blank');
+              window.open('https://example.com/zeeshan-ahmad-resume.pdf', '_blank');
             }}
           >
             <Download className="w-4 h-4 mr-2" />
@@ -148,7 +154,7 @@ const Navigation = () => {
               <Button 
                 className="btn-hero w-full"
                 onClick={() => {
-                  window.open('/resume.pdf', '_blank');
+                  window.open('https://example.com/zeeshan-ahmad-resume.pdf', '_blank');
                   setIsOpen(false);
                 }}
               >

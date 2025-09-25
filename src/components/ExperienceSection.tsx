@@ -75,16 +75,18 @@ const ExperienceSection = () => {
 
   return (
     <section id="experience" className="py-20 bg-muted/30 relative overflow-hidden">
-      {/* Parallax Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-40 left-20 w-32 h-32 bg-primary/5 rounded-full blur-2xl parallax-medium"></div>
-        <div className="absolute bottom-40 right-20 w-48 h-48 bg-secondary/5 rounded-full blur-2xl parallax-slow"></div>
-      </div>
-      
-      <div className="container mx-auto px-6 relative z-10">
+      {/* Add padding to account for fixed header */}
+      <div className="pt-20">
+        {/* Parallax Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-40 left-20 w-32 h-32 bg-primary/5 rounded-full blur-2xl parallax-medium"></div>
+          <div className="absolute bottom-40 right-20 w-48 h-48 bg-secondary/5 rounded-full blur-2xl parallax-slow"></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient-accent parallax-fast">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient-accent">
             Professional Journey
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -221,6 +223,7 @@ const ExperienceSection = () => {
               </div>
             </Card>
           ))}
+        </div>
         </div>
       </div>
     </section>

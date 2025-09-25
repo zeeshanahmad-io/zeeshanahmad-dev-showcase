@@ -35,16 +35,18 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-20 bg-muted/30 relative overflow-hidden">
-      {/* Parallax Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-10 w-40 h-40 bg-primary/5 rounded-full blur-2xl parallax-fast"></div>
-        <div className="absolute bottom-20 left-10 w-60 h-60 bg-secondary/5 rounded-full blur-2xl parallax-slow"></div>
-      </div>
-      
-      <div className="container mx-auto px-6 relative z-10">
+      {/* Add padding to account for fixed header */}
+      <div className="pt-20">
+        {/* Parallax Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 right-10 w-40 h-40 bg-primary/5 rounded-full blur-2xl parallax-fast"></div>
+          <div className="absolute bottom-20 left-10 w-60 h-60 bg-secondary/5 rounded-full blur-2xl parallax-slow"></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient-accent parallax-medium">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient-accent">
             Innovative Leader & Full-Stack Engineer
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -104,6 +106,7 @@ const AboutSection = () => {
               </Badge>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>
