@@ -20,8 +20,8 @@ const PortfolioSection = () => {
       tags: ["Python", "macOS", "Desktop App", "Native Development"],
       links: {
         live: "https://keepmacawake.netlify.app/",
-        github: "#",
-        download: "#"
+        github: "https://github.com/zeeshanahmad/keepmacawake",
+        download: "https://keepmacawake.netlify.app/download"
       },
       status: "Live"
     },
@@ -32,7 +32,7 @@ const PortfolioSection = () => {
       tags: ["React", "TypeScript", "Tailwind CSS", "Netlify", "Healthcare"],
       links: {
         live: "https://drfaiyazahmad.com",
-        github: "#"
+        github: "https://github.com/zeeshanahmad/drfaiyazahmad-clinic"
       },
       status: "Live"
     },
@@ -43,7 +43,7 @@ const PortfolioSection = () => {
       tags: ["React", "TypeScript", "Tailwind CSS", "Markdown", "Healthcare Platform"],
       links: {
         live: "https://docscale.in",
-        github: "#"
+        github: "https://github.com/zeeshanahmad/docscale"
       },
       status: "Live"
     },
@@ -54,7 +54,7 @@ const PortfolioSection = () => {
       tags: ["Next.js", "TypeScript", "Clerk Auth", "MongoDB", "SaaS", "Multi-tenant"],
       links: {
         live: "https://dineview.in",
-        github: "#"
+        github: "https://github.com/zeeshanahmad/dineview"
       },
       status: "In Development"
     },
@@ -156,7 +156,7 @@ const PortfolioSection = () => {
                     </Button>
                   )}
                   
-                  {project.links.github && (
+                  {project.links.github && project.links.github !== "#" && (
                     <Button 
                       variant="outline" 
                       size="sm"

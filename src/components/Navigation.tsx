@@ -60,7 +60,7 @@ const Navigation = () => {
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="text-2xl font-bold text-gradient-accent hover:opacity-80 transition-opacity">
-            ZA
+            ZEESHAN AHMAD
           </Link>
         </div>
 

@@ -35,7 +35,7 @@ const ContactSection = () => {
   ];
 
   const handleDownloadResume = () => {
-    console.log('Download resume clicked');
+    window.open('/resume.pdf', '_blank');
   };
 
   return (
