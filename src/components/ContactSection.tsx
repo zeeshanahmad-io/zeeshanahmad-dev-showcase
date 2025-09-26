@@ -64,28 +64,30 @@ const ContactSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {contactMethods.map((contact, index) => (
             <Card key={index} className="portfolio-card p-6 text-center group">
-              <contact.icon className="w-12 h-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-              <h3 className="text-lg font-semibold text-foreground mb-2">{contact.title}</h3>
-              {contact.link ? (
-                <a 
-                  href={contact.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary-glow transition-colors duration-300 font-medium block mb-2"
-                >
-                  {contact.value}
-                </a>
-              ) : (
-                <p className="text-foreground font-medium mb-2">{contact.value}</p>
-              )}
-              <p className="text-sm text-muted-foreground">{contact.description}</p>
+              <div className="relative z-10">
+                <contact.icon className="w-12 h-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-lg font-semibold text-foreground mb-2">{contact.title}</h3>
+                {contact.link ? (
+                  <a 
+                    href={contact.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary-glow transition-colors duration-300 font-medium block mb-2"
+                  >
+                    {contact.value}
+                  </a>
+                ) : (
+                  <p className="text-foreground font-medium mb-2">{contact.value}</p>
+                )}
+                <p className="text-sm text-muted-foreground">{contact.description}</p>
+              </div>
             </Card>
           ))}
         </div>
 
         {/* Call to Action Section */}
         <Card className="portfolio-card p-12 text-center">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto relative z-10">
             <h3 className="text-3xl font-bold text-foreground mb-6">
               Ready to Work Together?
             </h3>

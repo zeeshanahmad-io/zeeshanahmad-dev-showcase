@@ -124,7 +124,7 @@ const PortfolioSection = () => {
               </div>
 
               {/* Project Content */}
-              <div className="p-6 space-y-4">
+              <div className="p-6 space-y-4 relative z-10">
                 <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
