@@ -59,7 +59,7 @@ const HeroSection = () => {
         <div className="flex flex-wrap justify-center gap-6 mb-12 animate-fade-in">
           <div className="flex items-center space-x-2 text-muted-foreground">
             <div className="w-2 h-2 bg-primary rounded-full"></div>
-            <span>5/5 Star Performance Rating</span>
+            <span>Annually awarded the highest performance rating</span>
           </div>
           <div className="flex items-center space-x-2 text-muted-foreground">
             <div className="w-2 h-2 bg-secondary rounded-full"></div>

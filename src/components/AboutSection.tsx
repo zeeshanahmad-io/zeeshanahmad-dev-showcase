@@ -12,8 +12,8 @@ const AboutSection = () => {
     },
     {
       icon: Zap,
-      title: "5/5 Performance Rating",
-      description: "Consistently awarded top performance rating for sustained excellence at Oracle (2023, 2024, 2025)"
+      title: "Highest Performance Rating",
+      description: "Annually awarded the highest performance rating. (2023, 2024, 2025)"
     },
     {
       icon: BookOpen,

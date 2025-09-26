@@ -20,7 +20,7 @@ const ExperienceSection = () => {
         "Improved Global Search performance by 80% through dynamic child node fetching"
       ],
       products: ["Oracle Analytics Cloud", "Dataflows", "Semantic Model"],
-      achievements: ["5/5 Star Performance Rating (2023, 2024, 2025)"]
+      achievements: ["Annually awarded the highest performance rating. (2023, 2024, 2025)"]
     },
     {
       company: "SAP Labs India",
