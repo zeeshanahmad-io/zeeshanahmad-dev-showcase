@@ -39,7 +39,6 @@ const Blog = () => {
 
   const allTags = ['All', ...Array.from(new Set(posts.flatMap(post => post.tags || [])))];
   const featuredPost = posts.find(post => post.featured);
-  const regularPosts = posts.filter(post => !post.featured);
 
   if (loading) {
     return (
@@ -186,7 +185,7 @@ const Blog = () => {
               </div>
             ) : (
               <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                {filteredPosts.filter(post => !post.featured).map((post) => (
+                {filteredPosts.map((post) => (
                 <Card key={post.slug} className="portfolio-card overflow-hidden group">
                   {/* Featured Image */}
                   <div className="relative overflow-hidden h-48">
