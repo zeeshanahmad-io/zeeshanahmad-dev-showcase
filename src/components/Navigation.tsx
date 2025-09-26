@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -8,6 +8,7 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,12 +24,12 @@ const Navigation = () => {
   }, [location]);
 
   const navItems = [
-    { name: 'Home', href: '#home', route: '/' },
-    { name: 'About', href: '#about', route: '/' },
-    { name: 'Experience', href: '#experience', route: '/' },
-    { name: 'Portfolio', href: '#portfolio', route: '/' },
-    { name: 'Blog', href: '/blog', route: '/blog' },
-    { name: 'Contact', href: '#contact', route: '/' }
+    { name: 'Home', href: '#home', isExternal: false },
+    { name: 'About', href: '#about', isExternal: false },
+    { name: 'Experience', href: '#experience', isExternal: false },
+    { name: 'Portfolio', href: '#portfolio', isExternal: false },
+    { name: 'Blog', href: '/blog', isExternal: true },
+    { name: 'Contact', href: '#contact', isExternal: false }
   ];
 
   const scrollToSection = (href: string) => {
@@ -43,23 +44,22 @@ const Navigation = () => {
           top: offsetPosition,
           behavior: 'smooth'
         });
+        window.history.pushState(null, '', href);
       }
     }
     setIsOpen(false);
   };
 
   const handleNavClick = (item: typeof navItems[0]) => {
-    if (item.route && item.route !== '/') {
-      // External route - don't scroll
-      setIsOpen(false);
+    if (location.pathname !== '/' && !item.isExternal) {
+      navigate(`/${item.href}`);
     } else {
-      // Same page scroll
       scrollToSection(item.href);
     }
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <nav className={`fixed top-0 left-0 right-0 z-[999] transition-all duration-300 ${
       scrolled ? 'bg-background/95 backdrop-blur-md border-b border-border' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-6 py-4">
@@ -74,7 +74,7 @@ const Navigation = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => {
-            if (item.route && item.route !== '/') {
+            if (item.isExternal) {
               return (
                 <Link
                   key={item.name}
@@ -128,7 +128,7 @@ const Navigation = () => {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-background/95 backdrop-blur-sm border-t border-border">
             {navItems.map((item) => {
-              if (item.route && item.route !== '/') {
+              if (item.isExternal) {
                 return (
                   <Link
                     key={item.name}
