@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Share2, Calendar, User, Clock } from 'lucide-react';
+import { ArrowLeft, Share2, Calendar, User, Clock, List, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -10,11 +10,21 @@ import { getPostBySlug, formatDate, type BlogPost as BlogPostType } from '@/util
 import Navigation from '@/components/Navigation';
 import { Helmet } from 'react-helmet-async';
 
+interface TableOfContentsItem {
+  id: string;
+  title: string;
+  level: number;
+}
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>([]);
+  const [activeSection, setActiveSection] = useState<string>('');
+  const [showToc, setShowToc] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     const loadPost = async () => {
@@ -23,6 +33,17 @@ const BlogPost = () => {
           const postData = await getPostBySlug(slug);
           if (postData) {
             setPost(postData);
+            // Generate table of contents from headings
+            const headings = postData.content.match(/^#{2,3}\s+(.+)$/gm);
+            if (headings) {
+              const toc = headings.map((heading, index) => {
+                const level = heading.match(/^#+/)?.[0].length || 2;
+                const title = heading.replace(/^#+\s+/, '');
+                const id = `heading-${index}`;
+                return { id, title, level };
+              });
+              setTableOfContents(toc);
+            }
           } else {
             navigate('/blog');
           }
@@ -56,6 +77,38 @@ const BlogPost = () => {
     } else {
       // Fallback to copying URL
       navigator.clipboard.writeText(window.location.href);
+    }
+  };
+
+  useEffect(() => {
+    // Handle scroll spy for active section
+    const handleScroll = () => {
+      if (isScrolling) return;
+      const headings = document.querySelectorAll('h2, h3');
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = headings.length - 1; i >= 0; i--) {
+        const heading = headings[i] as HTMLElement;
+        if (heading.offsetTop <= scrollPosition) {
+          setActiveSection(heading.id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isScrolling]);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      setIsScrolling(true);
+      setActiveSection(id);
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, 1000); // Adjust timeout as needed
     }
   };
 
@@ -169,56 +222,161 @@ const BlogPost = () => {
         {/* Article Content */}
         <article className="py-12">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none dark:prose-invert">
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    h1: ({ children }) => (
-                      <h1 className="text-3xl font-bold mb-6 mt-8 text-foreground">{children}</h1>
-                    ),
-                    h2: ({ children }) => (
-                      <h2 className="text-2xl font-semibold mb-4 mt-8 text-foreground">{children}</h2>
-                    ),
-                    h3: ({ children }) => (
-                      <h3 className="text-xl font-semibold mb-3 mt-6 text-foreground">{children}</h3>
-                    ),
-                    p: ({ children }) => (
-                      <p className="mb-4 text-muted-foreground leading-relaxed">{children}</p>
-                    ),
-                    ul: ({ children }) => (
-                      <ul className="mb-4 ml-6 list-disc text-muted-foreground">{children}</ul>
-                    ),
-                    ol: ({ children }) => (
-                      <ol className="mb-4 ml-6 list-decimal text-muted-foreground">{children}</ol>
-                    ),
-                    li: ({ children }) => (
-                      <li className="mb-1">{children}</li>
-                    ),
-                    code: ({ children, className }) => {
-                      const isInlineCode = !className;
-                      if (isInlineCode) {
+            <div className="flex gap-12 max-w-7xl mx-auto relative">
+              {/* Table of Contents - Desktop Sidebar */}
+              {tableOfContents.length > 0 && (
+                <aside className="hidden xl:block w-80 shrink-0">
+                  <div className="sticky top-24">
+                    <div className="bg-muted/30 rounded-lg p-6 border">
+                      <div className="flex items-center gap-2 mb-4">
+                        <List className="w-4 h-4 text-primary" />
+                        <h3 className="font-semibold text-foreground">Table of Contents</h3>
+                      </div>
+                      <nav className="space-y-2">
+                        {tableOfContents.map((item) => (
+                          <button
+                            key={item.id}
+                            onClick={() => scrollToSection(item.id)}
+                            className={`block w-full text-left text-sm transition-colors hover:text-primary ${
+                              item.level === 3 ? 'pl-4' : ''
+                            } ${
+                              activeSection === item.id 
+                                ? 'text-primary font-medium' 
+                                : 'text-muted-foreground'
+                            }`}
+                          >
+                            {item.title}
+                          </button>
+                        ))}
+                      </nav>
+                    </div>
+                  </div>
+                </aside>
+              )}
+
+              {/* Main Content */}
+              <div className="flex-1 max-w-4xl">
+                {/* Mobile Table of Contents */}
+                {tableOfContents.length > 0 && (
+                  <div className="xl:hidden mb-12">
+                    <Button
+                      variant="outline"
+                      onClick={() => setShowToc(!showToc)}
+                      className="w-full justify-between"
+                    >
+                      <span className="flex items-center gap-2">
+                        <List className="w-4 h-4" />
+                        Table of Contents
+                      </span>
+                      <ArrowRight className={`w-4 h-4 transition-transform ${showToc ? 'rotate-90' : ''}`} />
+                    </Button>
+                    {showToc && (
+                      <div className="mt-4 bg-muted/30 rounded-lg p-4 border">
+                        <nav className="space-y-2">
+                          {tableOfContents.map((item) => (
+                            <button
+                              key={item.id}
+                              onClick={() => {
+                                scrollToSection(item.id);
+                                setShowToc(false);
+                              }}
+                              className={`block w-full text-left text-sm transition-colors hover:text-primary ${
+                                item.level === 3 ? 'pl-4' : ''
+                              } ${
+                                activeSection === item.id 
+                                  ? 'text-primary font-medium' 
+                                  : 'text-muted-foreground'
+                              }`}
+                            >
+                              {item.title}
+                            </button>
+                          ))}
+                        </nav>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="prose prose-lg max-w-none dark:prose-invert">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      h1: () => null,
+                      h2: ({ children, ...props }) => {
+                        const index = tableOfContents.findIndex(item => item.title === children?.toString());
+                        const id = index >= 0 ? `heading-${index}` : undefined;
+                        const isFirstH2 = index === 0;
                         return (
-                          <code className="px-1.5 py-0.5 bg-muted text-foreground rounded text-sm font-mono">
-                            {children}
-                          </code>
+                          <>
+                            {isFirstH2 && post.featured_image && (
+                              <div className="mb-12">
+                                <img 
+                                  src={post.featured_image} 
+                                  alt={post.title}
+                                  className="w-full rounded-lg shadow-lg"
+                                />
+                              </div>
+                            )}
+                            <h2 
+                              id={id} 
+                              className="text-2xl font-semibold mb-4 mt-8 text-foreground scroll-mt-24"
+                              {...props}
+                            >
+                              {children}
+                            </h2>
+                          </>
                         );
-                      }
-                      return (
-                        <pre className="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
-                          <code className="text-foreground font-mono text-sm">{children}</code>
-                        </pre>
-                      );
-                    },
-                    blockquote: ({ children }) => (
-                      <blockquote className="border-l-4 border-primary pl-4 py-2 mb-4 bg-muted/50 rounded-r">
-                        {children}
-                      </blockquote>
-                    ),
-                  }}
-                >
-                  {post.content}
-                </ReactMarkdown>
+                      },
+                      h3: ({ children, ...props }) => {
+                        const index = tableOfContents.findIndex(item => item.title === children?.toString());
+                        const id = index >= 0 ? `heading-${index}` : undefined;
+                        return (
+                          <h3 
+                            id={id} 
+                            className="text-xl font-semibold mb-3 mt-6 text-foreground scroll-mt-24"
+                            {...props}
+                          >
+                            {children}
+                          </h3>
+                        );
+                      },
+                      p: ({ children }) => (
+                        <p className="mb-4 text-muted-foreground leading-relaxed">{children}</p>
+                      ),
+                      ul: ({ children }) => (
+                        <ul className="mb-4 ml-6 list-disc text-muted-foreground">{children}</ul>
+                      ),
+                      ol: ({ children }) => (
+                        <ol className="mb-4 ml-6 list-decimal text-muted-foreground">{children}</ol>
+                      ),
+                      li: ({ children }) => (
+                        <li className="mb-1">{children}</li>
+                      ),
+                      code: ({ children, className }) => {
+                        const isInlineCode = !className;
+                        if (isInlineCode) {
+                          return (
+                            <code className="px-1.5 py-0.5 bg-muted text-foreground rounded text-sm font-mono">
+                              {children}
+                            </code>
+                          );
+                        }
+                        return (
+                          <pre className="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
+                            <code className="text-foreground font-mono text-sm">{children}</code>
+                          </pre>
+                        );
+                      },
+                      blockquote: ({ children }) => (
+                        <blockquote className="border-l-4 border-primary pl-4 py-2 mb-4 bg-muted/50 rounded-r">
+                          {children}
+                        </blockquote>
+                      ),
+                    }}
+                  >
+                    {post.content}
+                  </ReactMarkdown>
+                </div>
               </div>
             </div>
           </div>
