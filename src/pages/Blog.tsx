@@ -97,7 +97,7 @@ const Blog = () => {
                       </div>
                     )}
                   </div>
-                  <div className="p-8 space-y-6">
+                  <div className="p-8 space-y-6 relative z-10">
                     <Badge className="bg-primary/20 text-primary border-primary/30">
                       <Star className="w-3 h-3 mr-1" />
                       Featured
@@ -206,7 +206,7 @@ const Blog = () => {
                   </div>
 
                   {/* Post Content */}
-                  <div className="p-6 space-y-4">
+                  <div className="p-6 space-y-4 relative z-10">
                     <h2 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
                       {post.title}
                     </h2>

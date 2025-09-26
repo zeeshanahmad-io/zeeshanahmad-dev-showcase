@@ -2,7 +2,7 @@
 title: "Building Scalable Healthcare Platforms: Architecture Lessons Learned"
 excerpt: "A deep dive into the architectural decisions and challenges faced when building enterprise healthcare platforms, focusing on security, compliance, and scalability."
 author: "Zeeshan Ahmad"
-published_date: "2024-02-28"
+published_date: "2024-03-28"
 featured_image: "/images/blogs/healthcare-tech.jpg"
 tags: ["Software Architecture", "Healthcare Tech", "Cloud Computing"]
 featured: false
