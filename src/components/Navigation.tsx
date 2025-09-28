@@ -103,7 +103,7 @@ const Navigation = () => {
           <Button 
             className="btn-hero"
             onClick={() => {
-              window.open('https://example.com/zeeshan-ahmad-resume.pdf', '_blank');
+              window.open('/resume/resume.pdf', '_blank');
             }}
           >
             <Download className="w-4 h-4 mr-2" />
@@ -154,7 +154,7 @@ const Navigation = () => {
               <Button 
                 className="btn-hero w-full"
                 onClick={() => {
-                  window.open('https://example.com/zeeshan-ahmad-resume.pdf', '_blank');
+                  window.open('/resume/resume.pdf', '_blank');
                   setIsOpen(false);
                 }}
               >

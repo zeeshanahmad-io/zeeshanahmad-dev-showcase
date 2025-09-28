@@ -20,7 +20,7 @@ const PortfolioSection = () => {
       tags: ["Python", "macOS", "Desktop App", "Native Development"],
       links: {
         live: "https://keepmacawake.netlify.app/",
-        github: "https://github.com/zeeshanahmad/keepmacawake",
+        github: "https://github.com/zeeshan1112/KeepMacAwake",
         download: "https://keepmacawake.netlify.app/download"
       },
       status: "Live"
@@ -32,7 +32,7 @@ const PortfolioSection = () => {
       tags: ["React", "TypeScript", "Tailwind CSS", "Netlify", "Healthcare"],
       links: {
         live: "https://drfaiyazahmad.com",
-        github: "https://github.com/zeeshanahmad/drfaiyazahmad-clinic"
+        github: "https://github.com/zeeshanahmad-io/neural-care-connect"
       },
       status: "Live"
     },
@@ -43,7 +43,7 @@ const PortfolioSection = () => {
       tags: ["React", "TypeScript", "Tailwind CSS", "Markdown", "Healthcare Platform"],
       links: {
         live: "https://docscale.in",
-        github: "https://github.com/zeeshanahmad/docscale"
+        github: "https://github.com/zeeshanahmad-io/docscale"
       },
       status: "Live"
     },

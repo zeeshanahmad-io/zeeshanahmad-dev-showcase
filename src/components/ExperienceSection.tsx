@@ -2,34 +2,26 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Building, GraduationCap, Award, BookOpen } from 'lucide-react';
+import oracleLogo from '@/assets/icons/oracle-logo.png';
+import sapLogo from '@/assets/icons/sap-logo.png';
+import gatechLogo from '@/assets/icons/gatech-logo.png';
+import ritLogo from '@/assets/icons/rit-logo.png';
 
 // Company and University Logos
 const OracleLogo = ({ className }: { className?: string }) => (
-  <svg className={className || "w-12 h-12"} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-    <path d="M12 6c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6zm0 10c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/>
-  </svg>
+  <img src={oracleLogo} alt="Oracle Logo" className={className || "w-20 h-auto"} />
 );
 
 const SAPLogo = ({ className }: { className?: string }) => (
-  <svg className={className || "w-12 h-12"} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M7.5 3h9a4.5 4.5 0 014.5 4.5v9a4.5 4.5 0 01-4.5 4.5h-9A4.5 4.5 0 013 16.5v-9A4.5 4.5 0 017.5 3z"/>
-    <text x="12" y="15" fontSize="8" textAnchor="middle" fill="white" fontWeight="bold">SAP</text>
-  </svg>
+  <img src={sapLogo} alt="SAP Logo" className={className || "w-16 h-auto"} />
 );
 
 const GeorgiaTechLogo = ({ className }: { className?: string }) => (
-  <svg className={className || "w-10 h-10"} viewBox="0 0 24 24" fill="currentColor">
-    <circle cx="12" cy="12" r="10"/>
-    <text x="12" y="16" fontSize="6" textAnchor="middle" fill="white" fontWeight="bold">GT</text>
-  </svg>
+  <img src={gatechLogo} alt="Georgia Tech Logo" className={className || "w-10 h-10"} />
 );
 
 const RamaiahLogo = ({ className }: { className?: string }) => (
-  <svg className={className || "w-10 h-10"} viewBox="0 0 24 24" fill="currentColor">
-    <rect x="2" y="2" width="20" height="20" rx="2"/>
-    <text x="12" y="16" fontSize="5" textAnchor="middle" fill="white" fontWeight="bold">RIT</text>
-  </svg>
+  <img src={ritLogo} alt="Ramaiah Institute of Technology Logo" className={className || "w-10 h-10"} />
 );
 
 const ExperienceSection = () => {
@@ -142,7 +134,7 @@ const ExperienceSection = () => {
                         <p className="text-xl text-primary font-semibold mb-1">{exp.company}</p>
                         <p className="text-muted-foreground">{exp.period}</p>
                       </div>
-                      <exp.logo className="w-12 h-12 text-primary flex-shrink-0" />
+                      <exp.logo className="w-16 h-auto text-primary flex-shrink-0" />
                     </div>
 
                     <div className="space-y-4">

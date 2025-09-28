@@ -4,14 +4,14 @@ import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 
 const HeroSection = () => {
   const handleDownloadResume = () => {
-    window.open('https://example.com/zeeshan-ahmad-resume.pdf', '_blank');
+    window.open('/resume/resume.pdf', '_blank');
   };
 
-  const scrollToAbout = () => {
-    const aboutSection = document.getElementById('about') as HTMLElement;
-    if (aboutSection) {
+  const scrollToPortfolio = () => {
+    const portfolioSection = document.getElementById('portfolio') as HTMLElement;
+    if (portfolioSection) {
       const headerOffset = 80;
-      const elementPosition = aboutSection.offsetTop;
+      const elementPosition = portfolioSection.offsetTop;
       const offsetPosition = elementPosition - headerOffset;
       
       window.scrollTo({
@@ -82,11 +82,11 @@ const HeroSection = () => {
           </Button>
           
           <Button
-            onClick={scrollToAbout}
+            onClick={scrollToPortfolio}
             variant="outline"
             className="btn-outline-glow text-lg px-8 py-4"
           >
-            Learn More About Me
+            View My Work
             <ArrowDown className="w-5 h-5 ml-3" />
           </Button>
         </div>
@@ -110,7 +110,7 @@ const HeroSection = () => {
             <Github className="w-6 h-6" />
           </a>
           <a 
-            href="mailto:zeeshan@zeeshanahmad.dev"
+            href="mailto:hello@zeeshanahmad.dev"
             className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
           >
             <Mail className="w-6 h-6" />
@@ -120,7 +120,7 @@ const HeroSection = () => {
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <button 
-            onClick={scrollToAbout}
+            onClick={scrollToPortfolio}
             className="text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowDown className="w-6 h-6" />

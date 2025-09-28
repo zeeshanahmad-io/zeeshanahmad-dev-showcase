@@ -8,8 +8,8 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "zeeshan@zeeshanahmad.dev",
-      link: "mailto:zeeshan@zeeshanahmad.dev",
+      value: "hello@zeeshanahmad.dev",
+      link: "mailto:hello@zeeshanahmad.dev",
       description: "Best way to reach me for opportunities and collaborations"
     },
     {
@@ -35,7 +35,7 @@ const ContactSection = () => {
   ];
 
   const handleDownloadResume = () => {
-    window.open('https://example.com/zeeshan-ahmad-resume.pdf', '_blank');
+    window.open('/resume/resume.pdf', '_blank');
   };
 
   return (
@@ -102,7 +102,7 @@ const ContactSection = () => {
                 className="btn-hero text-lg px-8 py-4"
                 asChild
               >
-                <a href="mailto:zeeshan@zeeshanahmad.dev">
+                <a href="mailto:hello@zeeshanahmad.dev">
                   <Mail className="w-5 h-5 mr-3" />
                   Send Me an Email
                 </a>
@@ -152,7 +152,7 @@ const ContactSection = () => {
               <Github className="w-5 h-5" />
             </a>
             <a 
-              href="mailto:zeeshan@zeeshanahmad.dev"
+              href="mailto:hello@zeeshanahmad.dev"
               className="text-muted-foreground hover:text-primary transition-colors duration-300"
             >
               <Mail className="w-5 h-5" />
