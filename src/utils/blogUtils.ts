@@ -50,7 +50,7 @@ const loadMarkdownFile = async (slug: string): Promise<BlogPost | null> => {
 
 // Available blog posts (these should match the actual markdown files)
 const availablePosts = [
-  'ai-development-trends-2024',
+  'ai-development-trends-2025',
   'healthcare-platform-architecture', 
   'macos-python-development'
 ];

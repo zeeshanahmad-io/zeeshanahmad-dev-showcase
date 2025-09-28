@@ -2,7 +2,7 @@
 title: "Optimizing Python Development on macOS: Tools and Workflows"
 excerpt: "A comprehensive guide to setting up an efficient Python development environment on macOS, including tool recommendations and workflow optimizations for maximum productivity."
 author: "Zeeshan Ahmad"
-published_date: "2024-01-20"
+published_date: "2025-01-20"
 featured_image: "/images/blogs/macos-python.jpg"
 tags: ["Python", "macOS", "Development Tools", "Productivity"]
 featured: false

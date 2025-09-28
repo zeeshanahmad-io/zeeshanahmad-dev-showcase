@@ -132,7 +132,7 @@ const ContactSection = () => {
         {/* Footer */}
         <div className="text-center mt-16 pt-8 border-t border-border">
           <p className="text-muted-foreground mb-4">
-            © 2024 Zeeshan Ahmad. Crafted with passion and precision.
+            © 2025 Zeeshan Ahmad. Crafted with passion and precision.
           </p>
           <div className="flex justify-center space-x-6">
             <a 
