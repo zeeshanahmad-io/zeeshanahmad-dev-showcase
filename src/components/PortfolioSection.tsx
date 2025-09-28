@@ -54,7 +54,7 @@ const PortfolioSection = () => {
       tags: ["Next.js", "TypeScript", "Clerk Auth", "MongoDB", "SaaS", "Multi-tenant"],
       links: {
         live: "https://dineview.in",
-        github: "https://github.com/zeeshanahmad/dineview"
+        github: "https://github.com/zeeshan1112/dineview"
       },
       status: "In Development"
     },

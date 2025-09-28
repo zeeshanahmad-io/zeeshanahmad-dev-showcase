@@ -15,15 +15,15 @@ const ContactSection = () => {
     {
       icon: Linkedin,
       title: "LinkedIn",
-      value: "linkedin.com/in/zeeshanahmad",
-      link: "https://linkedin.com/in/zeeshanahmad",
+      value: "linkedin.com/in/zeeshanahmad2",
+      link: "https://www.linkedin.com/in/zeeshanahmad2/",
       description: "Connect with me professionally"
     },
     {
       icon: Github,
       title: "GitHub",
-      value: "github.com/zeeshanahmad",
-      link: "https://github.com/zeeshanahmad",
+      value: "github.com/zeeshan1112",
+      link: "https://github.com/zeeshan1112",
       description: "Explore my open source contributions"
     },
     {
@@ -136,7 +136,7 @@ const ContactSection = () => {
           </p>
           <div className="flex justify-center space-x-6">
             <a 
-              href="https://linkedin.com/in/zeeshanahmad" 
+              href="https://www.linkedin.com/in/zeeshanahmad2/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors duration-300"
@@ -144,7 +144,7 @@ const ContactSection = () => {
               <Linkedin className="w-5 h-5" />
             </a>
             <a 
-              href="https://github.com/zeeshanahmad" 
+              href="https://github.com/zeeshan1112" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors duration-300"

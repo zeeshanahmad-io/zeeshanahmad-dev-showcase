@@ -32,7 +32,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="h-screen flex flex-col justify-center relative overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/20 to-background parallax-bg"></div>
       
@@ -42,7 +42,7 @@ const HeroSection = () => {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse parallax-medium"></div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-6 text-center relative z-10 pt-24 md:pt-0">
         {/* Main Headline */}
         <h1 className="hero-title mb-6 animate-fade-in">
           Principal Member of <br />
@@ -63,7 +63,7 @@ const HeroSection = () => {
           </div>
           <div className="flex items-center space-x-2 text-muted-foreground">
             <div className="w-2 h-2 bg-secondary rounded-full"></div>
-            <span>VP Award Winner at SAP</span>
+            <span>VP Award Winner</span>
           </div>
           <div className="flex items-center space-x-2 text-muted-foreground">
             <div className="w-2 h-2 bg-primary rounded-full"></div>
@@ -94,7 +94,7 @@ const HeroSection = () => {
         {/* Social Links */}
         <div className="flex justify-center space-x-6 animate-fade-in">
           <a 
-            href="https://linkedin.com/in/zeeshanahmad" 
+            href="https://www.linkedin.com/in/zeeshanahmad2/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
@@ -102,7 +102,7 @@ const HeroSection = () => {
             <Linkedin className="w-6 h-6" />
           </a>
           <a 
-            href="https://github.com/zeeshanahmad" 
+            href="https://github.com/zeeshan1112" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
