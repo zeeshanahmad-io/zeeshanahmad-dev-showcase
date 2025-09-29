@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar, User, Clock, Filter, Star } from 'lucide-react';
+import { ArrowRight, Calendar, User, Clock, Filter, Star, Bell } from 'lucide-react';
 import { getAllPosts, formatDate, BlogPost } from '@/utils/blogUtils';
 import Navigation from '@/components/Navigation';
+import { NewsletterDialog } from '@/components/NewsletterDialog';
 
 const Blog = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -63,10 +64,16 @@ const Blog = () => {
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gradient-accent">
                 Tech Insights & Innovations
               </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
                 Exploring the intersection of AI, full-stack development, and enterprise solutions. 
                 Insights from the trenches of building scalable software systems.
               </p>
+              <NewsletterDialog>
+                <Button size="lg" className="bg-gradient-to-r from-primary to-primary/80">
+                  <Bell className="w-5 h-5 mr-2" />
+                  Get Notified
+                </Button>
+              </NewsletterDialog>
             </div>
           </div>
         </section>
@@ -268,12 +275,12 @@ const Blog = () => {
                 I'm constantly working on new content covering AI development, software architecture, 
                 and emerging technologies. Stay tuned for more insights and tutorials.
               </p>
-              <Button variant="outline" className="btn-outline-glow" asChild>
-                <Link to="/#contact">
+              <NewsletterDialog>
+                <Button variant="outline" className="btn-outline-glow">
                   Get Notified
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </Button>
+                </Button>
+              </NewsletterDialog>
             </div>
           </div>
         </section>

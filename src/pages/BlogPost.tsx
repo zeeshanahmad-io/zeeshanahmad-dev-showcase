@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Share2, Calendar, User, Clock, List, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Share2, Calendar, User, Clock, List, ArrowRight, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getPostBySlug, formatDate, type BlogPost as BlogPostType } from '@/utils/blogUtils';
 import Navigation from '@/components/Navigation';
+import { NewsletterDialog } from '@/components/NewsletterDialog';
 import { Helmet } from 'react-helmet-async';
 
 interface TableOfContentsItem {
@@ -394,9 +395,12 @@ const BlogPost = () => {
                 Get in touch if you'd like to discuss these topics further.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button asChild>
-                  <Link to="/#contact">Get in Touch</Link>
-                </Button>
+                <NewsletterDialog>
+                  <Button>
+                    <Bell className="w-5 h-5 mr-2" />
+                    Get Notified
+                  </Button>
+                </NewsletterDialog>
                 <Button variant="outline" asChild>
                   <Link to="/blog">Read More Articles</Link>
                 </Button>
