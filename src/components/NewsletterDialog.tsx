@@ -25,7 +25,10 @@ export function NewsletterDialog({ children }: NewsletterDialogProps) {
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString()
+        body: new URLSearchParams({
+          'form-name': 'newsletter',
+          'email': formData.get('email') as string,
+        }).toString(),
       });
 
       if (response.ok) {
@@ -61,17 +64,13 @@ export function NewsletterDialog({ children }: NewsletterDialogProps) {
           name="newsletter"
           method="POST"
           data-netlify="true"
-          netlify-honeypot="bot-field"
+          action="/success"
           onSubmit={handleSubscribe}
           className="space-y-4"
         >
           {/* Hidden fields required by Netlify */}
           <input type="hidden" name="form-name" value="newsletter" />
-          <p className="hidden">
-            <label>
-              Don't fill this out if you're human: <input name="bot-field" />
-            </label>
-          </p>
+          <input type="hidden" name="subject" value="New Newsletter Subscription" />
 
           <div className="flex items-center space-x-2">
             <Mail className="w-5 h-5 text-muted-foreground" />
