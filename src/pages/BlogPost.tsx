@@ -155,9 +155,18 @@ const BlogPost = () => {
         {post.tags?.map((tag, index) => (
           <meta key={index} property="article:tag" content={tag} />
         ))}
+
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.excerpt} />
+        {post.featured_image && (
+          <meta name="twitter:image" content={post.featured_image} />
+        )}
+
+        {/* Canonical URL */}
+        <link rel="canonical" href={`https://zeeshanahmad.dev/blog/${post.slug}`} />
       </Helmet>
-      
-      <Navigation />
       
       <main className="pt-20">
         {/* Article Header */}
