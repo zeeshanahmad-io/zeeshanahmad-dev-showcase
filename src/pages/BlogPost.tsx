@@ -329,7 +329,7 @@ const BlogPost = () => {
                             )}
                             <h2 
                               id={id} 
-                              className="text-2xl font-semibold mb-4 mt-8 text-foreground scroll-mt-24"
+                              className="text-2xl font-semibold mb-4 mt-8 text-primary scroll-mt-24"
                               {...props}
                             >
                               {children}
@@ -382,6 +382,15 @@ const BlogPost = () => {
                           {children}
                         </blockquote>
                       ),
+                      table: ({ children }) => (
+                        <div className="my-6 overflow-x-auto rounded-lg border border-border">
+                          <table className="w-full text-left">{children}</table>
+                        </div>
+                      ),
+                      thead: ({ children }) => <thead className="bg-muted/50">{children}</thead>,
+                      tr: ({ children }) => <tr className="border-b border-border last:border-b-0">{children}</tr>,
+                      th: ({ children }) => <th className="p-4 font-semibold text-foreground">{children}</th>,
+                      td: ({ children }) => <td className="p-4 align-top text-muted-foreground">{children}</td>,
                     }}
                   >
                     {post.content}
