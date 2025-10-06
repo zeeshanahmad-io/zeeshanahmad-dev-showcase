@@ -158,6 +158,8 @@ const BlogPost = () => {
 
         {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@zeeshanahmad" />
+        <meta name="twitter:creator" content="@zeeshanahmad" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
         {post.featured_image && (
