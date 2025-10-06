@@ -52,7 +52,8 @@ const loadMarkdownFile = async (slug: string): Promise<BlogPost | null> => {
 const availablePosts = [
   'ai-development-trends-2025',
   'healthcare-platform-architecture', 
-  'macos-python-development'
+  'macos-python-development',
+  'password-management-guide'
 ];
 
 export const getAllPosts = async (): Promise<BlogPost[]> => {
