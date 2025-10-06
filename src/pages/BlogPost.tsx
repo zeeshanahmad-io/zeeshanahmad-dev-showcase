@@ -17,11 +17,15 @@ interface TableOfContentsItem {
   level: number;
 }
 
-const BlogPost = () => {
+interface BlogPostProps {
+  initialPost?: BlogPostType;
+}
+
+const BlogPost: React.FC<BlogPostProps> = ({ initialPost }) => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const [post, setPost] = useState<BlogPostType | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState<BlogPostType | null>(initialPost || null);
+  const [loading, setLoading] = useState(!initialPost);
   const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>([]);
   const [activeSection, setActiveSection] = useState<string>('');
   const [showToc, setShowToc] = useState(false);
@@ -58,8 +62,10 @@ const BlogPost = () => {
       setLoading(false);
     };
 
-    loadPost();
-  }, [slug, navigate]);
+    if (!initialPost) {
+      loadPost();
+    }
+  }, [slug, navigate, initialPost]);
 
   const handleShare = async () => {
     if (!post) return;
