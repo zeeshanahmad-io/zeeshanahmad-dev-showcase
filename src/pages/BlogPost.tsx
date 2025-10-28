@@ -393,6 +393,16 @@ const BlogPost = () => {
                       tr: ({ children }) => <tr className="border-b border-border last:border-b-0">{children}</tr>,
                       th: ({ children }) => <th className="p-4 font-semibold text-foreground">{children}</th>,
                       td: ({ children }) => <td className="p-4 align-top text-muted-foreground">{children}</td>,
+                      a: ({ children, href }) => (
+                        <a 
+                          href={href} 
+                          className="text-primary underline hover:opacity-80"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {children}
+                        </a>
+                      ),
                     }}
                   >
                     {post.content}

@@ -37,7 +37,7 @@ const loadMarkdownFile = async (slug: string): Promise<BlogPost | null> => {
       excerpt: data.excerpt || '',
       author: data.author || '',
       published_date: data.published_date || '',
-      featured_image: data.featured_image ? `https://zeeshanahmad.dev${data.featured_image}` : '',
+      featured_image: data.featured_image || '',
       tags: data.tags || [],
       featured: data.featured || false,
       reading_time: calculateReadingTime(content)
@@ -53,7 +53,8 @@ const availablePosts = [
   'ai-development-trends-2025',
   'healthcare-platform-architecture', 
   'macos-python-development',
-  'password-management-guide'
+  'password-management-guide',
+  'claude-code-openrouter-guide'
 ];
 
 export const getAllPosts = async (): Promise<BlogPost[]> => {
