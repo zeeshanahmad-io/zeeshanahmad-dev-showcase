@@ -1,6 +1,9 @@
 [build]
   publish = "dist"
-  command = "npm run build:prerender"
+  command = "npm run build:static"
+
+# If you want simple build without static generation, use:
+# command = "npm run build"
 
 # Enable prerendering for social media crawlers
 [[headers]]
