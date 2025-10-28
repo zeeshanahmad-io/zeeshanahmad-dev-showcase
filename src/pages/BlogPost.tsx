@@ -142,29 +142,28 @@ const BlogPost = () => {
       <Helmet>
         <title>{post.title} | Zeeshan Ahmad Blog</title>
         <meta name="description" content={post.excerpt} />
-        <meta name="author" content={post.author} />
-        <meta name="keywords" content={post.tags?.join(', ')} />
+
+        {/* Open Graph Meta Tags for Blog Post */}
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:type" content="article" />
-        <meta property="article:author" content={post.author} />
-        <meta property="article:published_time" content={post.published_date} />
+        <meta property="og:url" content={`https://zeeshanahmad.dev/blog/${post.slug}`} />
         <meta property="og:image" content={post.featured_image || 'https://static.toastmynetwork.com/zeeshanahmad.jpg'} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+
+        {/* Article Meta Tags */}
+        <meta property="article:author" content={post.author} />
+        <meta property="article:published_time" content={post.published_date} />
         {post.tags?.map((tag, index) => (
           <meta key={index} property="article:tag" content={tag} />
         ))}
 
         {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@zeeshanahmad" />
-        <meta name="twitter:creator" content="@zeeshanahmad" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
-        {post.featured_image && (
-          <meta name="twitter:image" content={post.featured_image} />
-        )}
+        <meta name="twitter:image" content={post.featured_image || 'https://static.toastmynetwork.com/zeeshanahmad.jpg'} />
 
         {/* Canonical URL */}
         <link rel="canonical" href={`https://zeeshanahmad.dev/blog/${post.slug}`} />

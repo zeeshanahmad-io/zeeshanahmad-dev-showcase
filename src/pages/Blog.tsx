@@ -59,16 +59,21 @@ const Blog = () => {
         <title>Blog | Zeeshan Ahmad - Tech Insights & Innovations</title>
         <meta name="description" content="Exploring the intersection of AI, full-stack development, and enterprise solutions. Insights from the trenches of building scalable software systems." />
         <meta name="keywords" content="blog, tech insights, AI, software development, full-stack, enterprise solutions" />
+
+        {/* Open Graph Meta Tags for Blog Listing */}
         <meta property="og:title" content="Blog | Zeeshan Ahmad" />
         <meta property="og:description" content="Exploring the intersection of AI, full-stack development, and enterprise solutions. Insights from the trenches of building scalable software systems." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://zeeshanahmad.dev/blog" />
+        <meta property="og:image" content="https://static.toastmynetwork.com/zeeshanahmad.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
 
-        {/* Twitter Card Tags */}
+        {/* Twitter Card Tags for Blog Listing */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@zeeshanahmad" />
-        <meta name="twitter:creator" content="@zeeshanahmad" />
         <meta name="twitter:title" content="Blog | Zeeshan Ahmad - Tech Insights & Innovations" />
         <meta name="twitter:description" content="Exploring the intersection of AI, full-stack development, and enterprise solutions. Insights from the trenches of building scalable software systems." />
+        <meta name="twitter:image" content="https://static.toastmynetwork.com/zeeshanahmad.jpg" />
 
         {/* Canonical URL */}
         <link rel="canonical" href="https://zeeshanahmad.dev/blog" />

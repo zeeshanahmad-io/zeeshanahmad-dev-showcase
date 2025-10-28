@@ -1,6 +1,6 @@
 [build]
   publish = "dist"
-  command = "npm run build"
+  command = "npm run build:prerender"
 
 # Enable prerendering for social media crawlers
 [[headers]]
