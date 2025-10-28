@@ -7,6 +7,7 @@ import { ArrowRight, Calendar, User, Clock, Filter, Star, Bell } from 'lucide-re
 import { getAllPosts, formatDate, BlogPost } from '@/utils/blogUtils';
 import Navigation from '@/components/Navigation';
 import { NewsletterDialog } from '@/components/NewsletterDialog';
+import { Helmet } from 'react-helmet-async';
 
 const Blog = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -54,6 +55,25 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Blog | Zeeshan Ahmad - Tech Insights & Innovations</title>
+        <meta name="description" content="Exploring the intersection of AI, full-stack development, and enterprise solutions. Insights from the trenches of building scalable software systems." />
+        <meta name="keywords" content="blog, tech insights, AI, software development, full-stack, enterprise solutions" />
+        <meta property="og:title" content="Blog | Zeeshan Ahmad" />
+        <meta property="og:description" content="Exploring the intersection of AI, full-stack development, and enterprise solutions. Insights from the trenches of building scalable software systems." />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@zeeshanahmad" />
+        <meta name="twitter:creator" content="@zeeshanahmad" />
+        <meta name="twitter:title" content="Blog | Zeeshan Ahmad - Tech Insights & Innovations" />
+        <meta name="twitter:description" content="Exploring the intersection of AI, full-stack development, and enterprise solutions. Insights from the trenches of building scalable software systems." />
+
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://zeeshanahmad.dev/blog" />
+      </Helmet>
+
       <Navigation />
       
       <main className="pt-20">
