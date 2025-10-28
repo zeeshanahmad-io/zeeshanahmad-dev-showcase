@@ -149,9 +149,9 @@ const BlogPost = () => {
         <meta property="og:type" content="article" />
         <meta property="article:author" content={post.author} />
         <meta property="article:published_time" content={post.published_date} />
-        {post.featured_image && (
-          <meta property="og:image" content={post.featured_image} />
-        )}
+        <meta property="og:image" content={post.featured_image || 'https://zeeshanahmad.dev/og-image.jpg'} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         {post.tags?.map((tag, index) => (
           <meta key={index} property="article:tag" content={tag} />
         ))}
