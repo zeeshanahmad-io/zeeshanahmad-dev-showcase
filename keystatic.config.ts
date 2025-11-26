@@ -1,8 +1,11 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-    storage: {
-        kind: 'local',
+    storage: process.env.NODE_ENV === 'development'
+        ? { kind: 'local' }
+        : { kind: 'cloud' },
+    cloud: {
+        project: 'zeeshanahmad-io/zeeshan-dev-showcase',
     },
     collections: {
         posts: collection({
