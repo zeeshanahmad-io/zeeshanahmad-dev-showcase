@@ -24,24 +24,35 @@ export const calculateReadingTime = (content: string): string => {
 // Function to load markdown files
 const loadMarkdownFile = async (slug: string): Promise<BlogPost | null> => {
   try {
-    const response = await fetch(`/blogs/${slug}.md`);
-    if (!response.ok) return null;
-    
+    const response = await fetch(`/blogs/${slug}.mdoc`);
+    if (!response.ok) {
+      console.error(`Failed to fetch /blogs/${slug}.mdoc: ${response.status}`);
+      return null;
+    }
+
     const markdown = await response.text();
-    const { data, content } = matter(markdown);
-    
-    return {
-      slug,
-      title: data.title || '',
-      content,
-      excerpt: data.excerpt || '',
-      author: data.author || '',
-      published_date: data.published_date || '',
-      featured_image: data.featured_image || '',
-      tags: data.tags || [],
-      featured: data.featured || false,
-      reading_time: calculateReadingTime(content)
-    };
+    console.log(`Fetched markdown for ${slug}, length: ${markdown.length}`);
+
+    try {
+      const { data, content } = matter(markdown);
+      console.log(`Parsed frontmatter for ${slug}:`, data);
+
+      return {
+        slug,
+        title: data.title || '',
+        content,
+        excerpt: data.excerpt || '',
+        author: data.author || '',
+        published_date: data.published_date || '',
+        featured_image: data.featured_image || '',
+        tags: data.tags || [],
+        featured: data.featured || false,
+        reading_time: calculateReadingTime(content)
+      };
+    } catch (parseError) {
+      console.error(`Error parsing frontmatter for ${slug}:`, parseError);
+      return null;
+    }
   } catch (error) {
     console.error(`Error loading blog post ${slug}:`, error);
     return null;
@@ -50,23 +61,23 @@ const loadMarkdownFile = async (slug: string): Promise<BlogPost | null> => {
 
 // Available blog posts (these should match the actual markdown files)
 const availablePosts = [
-  // 'ai-development-trends-2025',
-  // 'healthcare-platform-architecture', 
-  // 'macos-python-development',
+  'ai-development-trends-2025',
+  'healthcare-platform-architecture',
+  'macos-python-development',
   'password-management-guide',
   'claude-code-openrouter-guide'
 ];
 
 export const getAllPosts = async (): Promise<BlogPost[]> => {
   const posts: BlogPost[] = [];
-  
+
   for (const slug of availablePosts) {
     const post = await loadMarkdownFile(slug);
     if (post) {
       posts.push(post);
     }
   }
-  
+
   return posts.sort((a, b) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime());
 };
 
