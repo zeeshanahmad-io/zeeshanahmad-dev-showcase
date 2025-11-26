@@ -168,6 +168,65 @@ const BlogPost = () => {
 
         {/* Canonical URL */}
         <link rel="canonical" href={`https://zeeshanahmad.dev/blog/${post.slug}`} />
+
+        {/* JSON-LD Structured Data for BlogPosting */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.excerpt,
+            "image": post.featured_image || 'https://static.toastmynetwork.com/zeeshanahmad.jpg',
+            "author": {
+              "@type": "Person",
+              "name": post.author,
+              "url": "https://zeeshanahmad.dev"
+            },
+            "publisher": {
+              "@type": "Person",
+              "name": "Zeeshan Ahmad",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://static.toastmynetwork.com/zeeshanahmad.jpg"
+              }
+            },
+            "datePublished": post.published_date,
+            "dateModified": post.published_date,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://zeeshanahmad.dev/blog/${post.slug}`
+            },
+            "keywords": post.tags?.join(', ') || ''
+          })}
+        </script>
+
+        {/* JSON-LD Breadcrumb */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://zeeshanahmad.dev"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://zeeshanahmad.dev/blog"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": post.title,
+                "item": `https://zeeshanahmad.dev/blog/${post.slug}`
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       <main className="pt-20">
