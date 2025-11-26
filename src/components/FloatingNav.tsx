@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, User, Briefcase, FileText, Mail, BookOpen } from 'lucide-react';
+import { Home, User, Briefcase, FileText, Mail, BookOpen, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const FloatingNav = () => {
     const location = useLocation();
+    const { theme, toggleTheme } = useTheme();
 
     const navItems = [
         { name: 'Home', icon: Home, href: '/' },
@@ -57,6 +59,26 @@ const FloatingNav = () => {
                         </Link>
                     );
                 })}
+
+                {/* Separator */}
+                <div className="w-[1px] h-8 bg-border/50 mx-2" />
+
+                {/* Theme Toggle */}
+                <button
+                    onClick={toggleTheme}
+                    className="flex flex-col items-center gap-1 transition-all duration-300 relative group text-muted-foreground hover:text-foreground hover:scale-105"
+                >
+                    <div className="p-2 rounded-xl transition-colors group-hover:bg-muted">
+                        {theme === 'dark' ? (
+                            <Sun className="w-5 h-5" />
+                        ) : (
+                            <Moon className="w-5 h-5" />
+                        )}
+                    </div>
+                    <span className="text-[10px] font-medium tracking-wide opacity-80">
+                        {theme === 'dark' ? 'Light' : 'Dark'}
+                    </span>
+                </button>
             </motion.div>
         </div>
     );

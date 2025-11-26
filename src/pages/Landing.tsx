@@ -101,7 +101,7 @@ const Landing = () => {
             </motion.h1>
 
             <motion.p variants={itemVariants} className="max-w-2xl mx-auto text-xl md:text-2xl text-muted-foreground leading-relaxed font-light tracking-wide">
-              Crafting sophisticated digital experiences where design meets logic.
+              Crafting sophisticated digital experiences and intelligent systems where design meets logic.
             </motion.p>
           </motion.div>
         </motion.div>
