@@ -229,7 +229,7 @@ const BlogPost = () => {
         </script>
       </Helmet>
 
-      <main className="pt-20">
+      <main className="pt-20 overflow-x-hidden">
         {/* Article Header */}
         <header className="py-12 bg-gradient-to-b from-background to-muted/30">
           <div className="container mx-auto px-6">
@@ -497,6 +497,7 @@ const BlogPost = () => {
                                 customStyle={{ margin: 0, borderRadius: 0 }}
                                 showLineNumbers={true}
                                 wrapLines={true}
+                                wrapLongLines={true}
                               >
                                 {codeContent}
                               </SyntaxHighlighter>
