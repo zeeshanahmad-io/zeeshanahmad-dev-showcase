@@ -6,8 +6,11 @@ import { Badge } from '@/components/ui/badge';
 import logo from '@/assets/logo.png';
 import StarField from '@/components/StarField';
 
+import { useReaderMode } from '@/hooks/useReaderMode';
+
 const Landing = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isReaderMode = useReaderMode();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -192,12 +195,14 @@ const Landing = () => {
                   </div>
                 </div>
 
-                <div className="pt-4">
-                  <Link to="/resume" className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group">
-                    <span className="text-lg font-medium border-b border-primary/30 group-hover:border-primary transition-colors">Read full bio</span>
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </div>
+                {!isReaderMode && (
+                  <div className="pt-4">
+                    <Link to="/resume" className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group">
+                      <span className="text-lg font-medium border-b border-primary/30 group-hover:border-primary transition-colors">Read full bio</span>
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

@@ -2,14 +2,16 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, User, Briefcase, FileText, Mail, BookOpen, Sun, Moon } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useReaderMode } from '@/hooks/useReaderMode';
+import { cn } from '@/lib/utils';
 
 const FloatingNav = () => {
     const location = useLocation();
     const { theme, toggleTheme } = useTheme();
+    const isReaderMode = useReaderMode();
 
-    const navItems = [
+    const allNavItems = [
         { name: 'Home', icon: Home, href: '/' },
         { name: 'Portfolio', icon: Briefcase, href: '/portfolio' },
         { name: 'Resume', icon: FileText, href: '/resume' },
@@ -17,13 +19,20 @@ const FloatingNav = () => {
         { name: 'Contact', icon: Mail, href: '/contact' },
     ];
 
+    const navItems = isReaderMode
+        ? allNavItems.filter(item => !['Portfolio', 'Resume'].includes(item.name))
+        : allNavItems;
+
     const isActive = (path: string) => {
         if (path === '/' && location.pathname !== '/') return false;
         return location.pathname.startsWith(path);
     };
 
     return (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4">
+        <div className={cn(
+            "fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full px-4 transition-all duration-300",
+            isReaderMode ? "max-w-[300px]" : "max-w-md"
+        )}>
             <motion.div
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
