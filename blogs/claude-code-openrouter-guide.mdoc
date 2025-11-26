@@ -6,6 +6,7 @@ excerpt: >-
   setup.
 author: Zeeshan Ahmad
 published_date: 2025-10-28
+featured_image: /images/blogs/claude-code-openrouter-guide/featured_image.jpg
 tags:
   - AI & NLP
   - Development
@@ -117,16 +118,16 @@ For the best coding experience (context sharing, inline diffs, and debugging), l
 
 ### Common Roadblocks:
 
-**You see** **`429 Rate limit exceeded (Too Many Requests)`\*\*\*\*\*\*\*\*:**
+**You see** **`429 Rate limit exceeded (Too Many Requests)`\*\*\*\*\*\*\*\*\*\*\*\*:**
 
 - **Cause:** You have hit the daily quota on the free model.
 - **Solution:** You must wait until the daily reset. **Recommendation:** Add $10 to your OpenRouter account to unlock 1,000 requests per day, making your usage reliable.
 
-**You see** **`ReferenceError: File is not defined`\*\*\*\*\*\*\*\*:**
+**You see** **`ReferenceError: File is not defined`\*\*\*\*\*\*\*\*\*\*\*\*:**
 
 - **Cause:** Your terminal is running an unsupported Node version (v18.x).
 - **Solution:** Run `nvm use lts` inside the integrated terminal, then retry `ccr code`.
 
-**You see** **`⚠Auth conflict`\*\*\*\*\*\*\*\*:**
+**You see** **`⚠Auth conflict`\*\*\*\*\*\*\*\*\*\*\*\*:**
 
 - **Solution:** Run `unset ANTHROPIC_AUTH_TOKEN` in the terminal, and ensure you run `claude /logout` to clear the cached login file.

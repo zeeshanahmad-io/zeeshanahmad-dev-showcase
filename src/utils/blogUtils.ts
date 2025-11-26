@@ -31,11 +31,8 @@ const loadMarkdownFile = async (slug: string): Promise<BlogPost | null> => {
     }
 
     const markdown = await response.text();
-    console.log(`Fetched markdown for ${slug}, length: ${markdown.length}`);
-
     try {
       const { data, content } = matter(markdown);
-      console.log(`Parsed frontmatter for ${slug}:`, data);
 
       return {
         slug,
