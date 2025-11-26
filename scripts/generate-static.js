@@ -27,7 +27,23 @@ const formatDate = (dateString) => {
   });
 };
 
-const generateBlogIndexHTML = () => {
+const getAssetTags = async () => {
+  try {
+    const indexHtmlPath = path.join(DIST_DIR, 'index.html');
+    const indexHtml = await readFile(indexHtmlPath, 'utf-8');
+
+    // Extract script and link tags
+    const scriptTag = indexHtml.match(/<script type="module" crossorigin src="\/assets\/index-[^"]+\.js"><\/script>/)?.[0] || '';
+    const styleTag = indexHtml.match(/<link rel="stylesheet" crossorigin href="\/assets\/index-[^"]+\.css">/)?.[0] || '';
+
+    return { scriptTag, styleTag };
+  } catch (error) {
+    console.error('Error reading index.html for assets:', error);
+    return { scriptTag: '', styleTag: '' };
+  }
+};
+
+const generateBlogIndexHTML = (assetTags) => {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,8 +64,8 @@ const generateBlogIndexHTML = () => {
   <meta name="twitter:description" content="Exploring the intersection of AI, full-stack development, and enterprise solutions. Insights from the trenches of building scalable software systems.">
   <meta name="twitter:image" content="https://static.toastmynetwork.com/zeeshanahmad.jpg">
   <link rel="canonical" href="https://zeeshanahmad.dev/blog">
-  <script type="module" crossorigin src="/assets/index-DB9OSbJ2.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CU1tYrKm.css">
+  ${assetTags.scriptTag}
+  ${assetTags.styleTag}
 </head>
 <body>
   <div id="root"></div>
@@ -57,7 +73,7 @@ const generateBlogIndexHTML = () => {
 </html>`;
 };
 
-const generateBlogPostHTML = (slug, frontmatter, content) => {
+const generateBlogPostHTML = (slug, frontmatter, content, assetTags) => {
   const title = frontmatter.title || 'Blog Post';
   const excerpt = frontmatter.excerpt || 'Read this blog post.';
   const published_date = formatDate(frontmatter.published_date || new Date().toISOString());
@@ -87,8 +103,8 @@ const generateBlogPostHTML = (slug, frontmatter, content) => {
   <meta name="twitter:description" content="${excerpt}">
   <meta name="twitter:image" content="https://static.toastmynetwork.com/zeeshanahmad.jpg">
   <link rel="canonical" href="https://zeeshanahmad.dev/blog/${slug}">
-  <script type="module" crossorigin src="/assets/index-DB9OSbJ2.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CU1tYrKm.css">
+  ${assetTags.scriptTag}
+  ${assetTags.styleTag}
 </head>
 <body>
   <div id="root"></div>
@@ -99,8 +115,14 @@ const generateBlogPostHTML = (slug, frontmatter, content) => {
 async function generateStaticFiles() {
   console.log('🔄 Generating static HTML files for blog...\n');
 
+  // Get asset tags from index.html
+  const assetTags = await getAssetTags();
+  if (!assetTags.scriptTag || !assetTags.styleTag) {
+    console.warn('⚠️ Warning: Could not find script or style tags in index.html. Generated files might not load correctly.');
+  }
+
   // Generate blog index page
-  const blogIndexHTML = generateBlogIndexHTML();
+  const blogIndexHTML = generateBlogIndexHTML(assetTags);
   const blogIndexPath = path.join(DIST_DIR, 'blog', 'index.html');
   await mkdir(path.dirname(blogIndexPath), { recursive: true });
   await writeFile(blogIndexPath, blogIndexHTML);
@@ -117,7 +139,7 @@ async function generateStaticFiles() {
       const fileContent = await readFile(filePath, 'utf-8');
       const { data: frontmatter, content } = matter(fileContent);
 
-      const html = generateBlogPostHTML(slug, frontmatter, content);
+      const html = generateBlogPostHTML(slug, frontmatter, content, assetTags);
       const outputPath = path.join(DIST_DIR, 'blog', slug, 'index.html');
       await mkdir(path.dirname(outputPath), { recursive: true });
       await writeFile(outputPath, html);
