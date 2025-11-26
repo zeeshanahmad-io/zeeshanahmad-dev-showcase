@@ -3,7 +3,7 @@ import { useRef, useEffect } from 'react';
 import { ArrowRight, Briefcase, GraduationCap, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
-import logo from '@/assets/logo.png';
+import logo from '@/assets/logo.webp';
 import StarField from '@/components/StarField';
 
 import { useReaderMode } from '@/hooks/useReaderMode';
