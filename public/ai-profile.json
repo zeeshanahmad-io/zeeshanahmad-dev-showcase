@@ -1,0 +1,109 @@
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Zeeshan Ahmad",
+    "url": "https://zeeshanahmad.dev",
+    "image": "https://static.toastmynetwork.com/zeeshanahmad.jpg",
+    "jobTitle": "Principal Member of Technical Staff",
+    "worksFor": {
+        "@type": "Organization",
+        "name": "Oracle"
+    },
+    "description": "Principal Technical Staff with 10+ years of experience in AI-driven solutions, full-stack development, and enterprise software architecture. Consistently recognized top performer with VP Award and highest performance ratings.",
+    "email": "contact@zeeshanahmad.dev",
+    "alumniOf": [
+        {
+            "@type": "Organization",
+            "name": "Georgia Institute of Technology",
+            "description": "Master of Science in Computer Science - Specialization in Machine Learning"
+        },
+        {
+            "@type": "Organization",
+            "name": "Rochester Institute of Technology",
+            "description": "Bachelor of Science in Software Engineering"
+        }
+    ],
+    "knowsAbout": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Full-Stack Development",
+        "Software Architecture",
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Cloud Computing",
+        "AWS",
+        "Enterprise Software",
+        "API Design",
+        "Database Design",
+        "DevOps",
+        "Agile Methodologies"
+    ],
+    "knowsLanguage": [
+        {
+            "@type": "Language",
+            "name": "English",
+            "alternateName": "en"
+        },
+        {
+            "@type": "Language",
+            "name": "Urdu",
+            "alternateName": "ur"
+        },
+        {
+            "@type": "Language",
+            "name": "Hindi",
+            "alternateName": "hi"
+        }
+    ],
+    "hasCredential": [
+        {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "degree",
+            "name": "Master of Science in Computer Science",
+            "educationalLevel": "Graduate",
+            "recognizedBy": {
+                "@type": "Organization",
+                "name": "Georgia Institute of Technology"
+            }
+        },
+        {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "degree",
+            "name": "Bachelor of Science in Software Engineering",
+            "educationalLevel": "Undergraduate",
+            "recognizedBy": {
+                "@type": "Organization",
+                "name": "Rochester Institute of Technology"
+            }
+        }
+    ],
+    "award": [
+        "VP Award - Oracle (2024)",
+        "Highest Performance Rating - Oracle (Annual)",
+        "Top Performer Recognition"
+    ],
+    "sameAs": [
+        "https://github.com/zeeshanahmad-io",
+        "https://linkedin.com/in/zeeshanahmad-io"
+    ],
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://zeeshanahmad.dev"
+    },
+    "subjectOf": {
+        "@type": "WebSite",
+        "name": "Zeeshan Ahmad - Portfolio & Blog",
+        "url": "https://zeeshanahmad.dev",
+        "description": "Personal portfolio and technical blog covering AI, software development, and enterprise solutions"
+    },
+    "potentialAction": {
+        "@type": "ContactAction",
+        "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://zeeshanahmad.dev/contact"
+        }
+    }
+}

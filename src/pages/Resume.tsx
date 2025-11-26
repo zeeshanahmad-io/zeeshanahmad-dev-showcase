@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Building, GraduationCap, Award, BookOpen, Download, Zap, Code } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-import oracleLogo from '@/assets/icons/oracle-logo.png';
-import sapLogo from '@/assets/icons/sap-logo.png';
-import gatechLogo from '@/assets/icons/gatech-logo.png';
-import ritLogo from '@/assets/icons/rit-logo.png';
+import oracleLogo from '@/assets/icons/oracle-logo.webp';
+import sapLogo from '@/assets/icons/sap-logo.webp';
+import gatechLogo from '@/assets/icons/gatech-logo.webp';
+import ritLogo from '@/assets/icons/rit-logo.webp';
 
 // Company and University Logos
 const OracleLogo = ({ className }: { className?: string }) => (

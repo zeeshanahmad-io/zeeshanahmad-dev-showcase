@@ -6,11 +6,11 @@ import { ExternalLink, Github, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Import project images
-import keepMacAwakeImg from '@/assets/keepmacawake-preview.jpg';
-import drFaiyazImg from '@/assets/drfaiyaz-preview.jpg';
-import docScaleImg from '@/assets/docscale-preview.jpg';
-import dineViewImg from '@/assets/dineview-preview.jpg';
-import birthdayReminderImg from '@/assets/birthday-reminder-preview.jpg';
+import keepMacAwakeImg from '@/assets/keepmacawake-preview.webp';
+import drFaiyazImg from '@/assets/drfaiyaz-preview.webp';
+import docScaleImg from '@/assets/docscale-preview.webp';
+import dineViewImg from '@/assets/dineview-preview.webp';
+import birthdayReminderImg from '@/assets/birthday-reminder-preview.webp';
 
 const Portfolio = () => {
     const projects = [
