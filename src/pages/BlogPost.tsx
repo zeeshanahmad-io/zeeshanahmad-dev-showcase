@@ -4,7 +4,7 @@ import { ArrowLeft, Share2, Calendar, User, Clock, List, ArrowRight, Bell } from
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import Markdoc from '@markdoc/markdoc';
+import Markdoc, { Tag } from '@markdoc/markdoc';
 import { getPostBySlug, formatDate, type BlogPost as BlogPostType } from '@/utils/blogUtils';
 
 import { NewsletterDialog } from '@/components/NewsletterDialog';
@@ -325,7 +325,51 @@ const BlogPost = () => {
                         image: { render: 'Image', attributes: { src: { type: String }, alt: { type: String }, title: { type: String } } },
                       },
                       tags: {
-                        table: { render: 'Table' },
+                        table: {
+                          render: 'Table',
+                          transform(node, config) {
+                            const children = node.transformChildren(config);
+
+                            // Filter out non-list children (like thematic breaks) and ensure they are Tags
+                            const lists = children.filter((child): child is Tag =>
+                              child instanceof Tag && (child.name === 'List' || child.name === 'list')
+                            );
+
+                            // If no lists found (e.g. standard table or other content), render as div to avoid invalid nesting
+                            if (lists.length === 0) return new Tag('div', {}, children);
+
+                            // First list is the header
+                            const headerList = lists[0];
+                            const headerItems = headerList.children.filter((child): child is Tag =>
+                              child instanceof Tag && (child.name === 'ListItem' || child.name === 'item')
+                            );
+
+                            const thead = new Tag('TableHead', {}, [
+                              new Tag('TableRow', {},
+                                headerItems.map((item) =>
+                                  new Tag('TableHeader', {}, item.children)
+                                )
+                              )
+                            ]);
+
+                            // Remaining lists are body rows
+                            const bodyLists = lists.slice(1);
+                            const tbody = new Tag('TableBody', {},
+                              bodyLists.map((list) => {
+                                const listItems = list.children.filter((child): child is Tag =>
+                                  child instanceof Tag && (child.name === 'ListItem' || child.name === 'item')
+                                );
+                                return new Tag('TableRow', {},
+                                  listItems.map((item) =>
+                                    new Tag('TableCell', {}, item.children)
+                                  )
+                                )
+                              })
+                            );
+
+                            return new Tag('Table', {}, [thead, tbody]);
+                          }
+                        },
                       }
                     });
                     return Markdoc.renderers.react(content, React, {
