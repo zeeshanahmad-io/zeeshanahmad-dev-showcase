@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/card';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getPostBySlug, formatDate, type BlogPost as BlogPostType } from '@/utils/blogUtils';
-import Navigation from '@/components/Navigation';
+
 import { NewsletterDialog } from '@/components/NewsletterDialog';
 import { Helmet } from 'react-helmet-async';
 
@@ -63,7 +63,7 @@ const BlogPost = () => {
 
   const handleShare = async () => {
     if (!post) return;
-    
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -168,7 +168,7 @@ const BlogPost = () => {
         {/* Canonical URL */}
         <link rel="canonical" href={`https://zeeshanahmad.dev/blog/${post.slug}`} />
       </Helmet>
-      
+
       <main className="pt-20">
         {/* Article Header */}
         <header className="py-12 bg-gradient-to-b from-background to-muted/30">
@@ -205,9 +205,9 @@ const BlogPost = () => {
                     <span>{post.reading_time}</span>
                   </div>
                 )}
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   onClick={handleShare}
                   className="ml-auto"
                 >
@@ -248,13 +248,11 @@ const BlogPost = () => {
                           <button
                             key={item.id}
                             onClick={() => scrollToSection(item.id)}
-                            className={`block w-full text-left text-sm transition-colors hover:text-primary ${
-                              item.level === 3 ? 'pl-4' : ''
-                            } ${
-                              activeSection === item.id 
-                                ? 'text-primary font-medium' 
+                            className={`block w-full text-left text-sm transition-colors hover:text-primary ${item.level === 3 ? 'pl-4' : ''
+                              } ${activeSection === item.id
+                                ? 'text-primary font-medium'
                                 : 'text-muted-foreground'
-                            }`}
+                              }`}
                           >
                             {item.title}
                           </button>
@@ -291,13 +289,11 @@ const BlogPost = () => {
                                 scrollToSection(item.id);
                                 setShowToc(false);
                               }}
-                              className={`block w-full text-left text-sm transition-colors hover:text-primary ${
-                                item.level === 3 ? 'pl-4' : ''
-                              } ${
-                                activeSection === item.id 
-                                  ? 'text-primary font-medium' 
+                              className={`block w-full text-left text-sm transition-colors hover:text-primary ${item.level === 3 ? 'pl-4' : ''
+                                } ${activeSection === item.id
+                                  ? 'text-primary font-medium'
                                   : 'text-muted-foreground'
-                              }`}
+                                }`}
                             >
                               {item.title}
                             </button>
@@ -321,15 +317,15 @@ const BlogPost = () => {
                           <>
                             {isFirstH2 && post.featured_image && (
                               <div className="mb-12">
-                                <img 
-                                  src={post.featured_image} 
+                                <img
+                                  src={post.featured_image}
                                   alt={post.title}
                                   className="w-full rounded-lg shadow-lg"
                                 />
                               </div>
                             )}
-                            <h2 
-                              id={id} 
+                            <h2
+                              id={id}
                               className="text-2xl font-semibold mb-4 mt-8 text-primary scroll-mt-24"
                               {...props}
                             >
@@ -342,8 +338,8 @@ const BlogPost = () => {
                         const index = tableOfContents.findIndex(item => item.title === children?.toString());
                         const id = index >= 0 ? `heading-${index}` : undefined;
                         return (
-                          <h3 
-                            id={id} 
+                          <h3
+                            id={id}
                             className="text-xl font-semibold mb-3 mt-6 text-foreground scroll-mt-24"
                             {...props}
                           >
@@ -393,8 +389,8 @@ const BlogPost = () => {
                       th: ({ children }) => <th className="p-4 font-semibold text-foreground">{children}</th>,
                       td: ({ children }) => <td className="p-4 align-top text-muted-foreground">{children}</td>,
                       a: ({ children, href }) => (
-                        <a 
-                          href={href} 
+                        <a
+                          href={href}
                           className="text-primary underline hover:opacity-80"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -420,7 +416,7 @@ const BlogPost = () => {
                 Enjoyed this article?
               </h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                I write about AI, software development, and technology trends. 
+                I write about AI, software development, and technology trends.
                 Get in touch if you'd like to discuss these topics further.
               </p>
               <div className="flex flex-wrap justify-center gap-4">

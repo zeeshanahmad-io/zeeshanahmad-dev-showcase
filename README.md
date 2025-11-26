@@ -51,3 +51,16 @@ To run this project locally, follow these steps:
     ```
 
 The application will be available at `http://localhost:8080`.
+
+## 📖 Reader Mode
+
+This project includes a "Reader Mode" feature designed for sharing the blog without exposing the full professional portfolio (Resume/Portfolio).
+
+**How to use:**
+Append `?mode=reader` to any URL.
+Example: `https://your-domain.com/blog?mode=reader`
+
+**Behavior:**
+- Hides "Portfolio" and "Resume" links from the navigation bar.
+- Hides the "Read full bio" link on the landing page.
+- Persists for the duration of the browser session.

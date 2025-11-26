@@ -79,8 +79,8 @@ const Blog = () => {
         <link rel="canonical" href="https://zeeshanahmad.dev/blog" />
       </Helmet>
 
-      <Navigation />
-      
+
+
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-20 bg-gradient-to-b from-background to-muted/30">
@@ -90,7 +90,7 @@ const Blog = () => {
                 Tech Insights & Innovations
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-                Exploring the intersection of AI, full-stack development, and enterprise solutions. 
+                Exploring the intersection of AI, full-stack development, and enterprise solutions.
                 Insights from the trenches of building scalable software systems.
               </p>
               <NewsletterDialog>
@@ -115,8 +115,8 @@ const Blog = () => {
                 <div className="grid lg:grid-cols-2 gap-0">
                   <div className="relative overflow-hidden h-64 lg:h-full">
                     {featuredPost.featured_image ? (
-                      <img 
-                        src={featuredPost.featured_image} 
+                      <img
+                        src={featuredPost.featured_image}
                         alt={featuredPost.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -139,7 +139,7 @@ const Blog = () => {
                     <p className="text-muted-foreground leading-relaxed line-clamp-3">
                       {featuredPost.excerpt}
                     </p>
-                    
+
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
@@ -166,7 +166,7 @@ const Blog = () => {
                     )}
 
                     <div className="pt-4">
-                      <Button 
+                      <Button
                         className="btn-hero"
                         asChild
                       >
@@ -210,7 +210,7 @@ const Blog = () => {
         <section className="py-20">
           <div className="container mx-auto px-6">
             <h2 className="text-3xl font-bold text-foreground mb-12">All Articles</h2>
-            
+
             {filteredPosts.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-muted-foreground text-lg">No articles found for the selected category.</p>
@@ -218,86 +218,86 @@ const Blog = () => {
             ) : (
               <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
                 {filteredPosts.map((post) => (
-                <Card key={post.slug} className="portfolio-card overflow-hidden group">
-                  {/* Featured Image */}
-                  <div className="relative overflow-hidden h-48">
-                    {post.featured_image ? (
-                      <img 
-                        src={post.featured_image} 
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-elegant flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <h3 className="text-lg font-semibold">{post.title.split(':')[0]}</h3>
+                  <Card key={post.slug} className="portfolio-card overflow-hidden group">
+                    {/* Featured Image */}
+                    <div className="relative overflow-hidden h-48">
+                      {post.featured_image ? (
+                        <img
+                          src={post.featured_image}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-elegant flex items-center justify-center">
+                          <div className="text-center text-white">
+                            <h3 className="text-lg font-semibold">{post.title.split(':')[0]}</h3>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Post Content */}
+                    <div className="p-6 space-y-4 relative z-10">
+                      <h2 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                        {post.title}
+                      </h2>
+
+                      <p className="text-muted-foreground leading-relaxed line-clamp-3">
+                        {post.excerpt}
+                      </p>
+
+                      {/* Meta Information */}
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {formatDate(post.published_date)}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <User className="w-4 h-4" />
+                          {post.author}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {post.reading_time}
                         </div>
                       </div>
-                    )}
-                  </div>
 
-                  {/* Post Content */}
-                  <div className="p-6 space-y-4 relative z-10">
-                    <h2 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                      {post.title}
-                    </h2>
-                    
-                    <p className="text-muted-foreground leading-relaxed line-clamp-3">
-                      {post.excerpt}
-                    </p>
+                      {/* Tags */}
+                      {post.tags && (
+                        <div className="flex flex-wrap gap-2">
+                          {post.tags.slice(0, 3).map((tag) => (
+                            <Badge key={tag} variant="outline" className="text-xs">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
 
-                    {/* Meta Information */}
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {formatDate(post.published_date)}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <User className="w-4 h-4" />
-                        {post.author}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {post.reading_time}
+                      {/* Read More Button */}
+                      <div className="pt-4">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="btn-outline-glow group"
+                          asChild
+                        >
+                          <Link to={`/blog/${post.slug}`}>
+                            Read More
+                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+                        </Button>
                       </div>
                     </div>
-
-                    {/* Tags */}
-                    {post.tags && (
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags.slice(0, 3).map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Read More Button */}
-                    <div className="pt-4">
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        className="btn-outline-glow group"
-                        asChild
-                      >
-                        <Link to={`/blog/${post.slug}`}>
-                          Read More
-                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
                 ))}
               </div>
             )}
-            
+
             {/* More Content Coming Soon */}
             <div className="text-center mt-16 py-12 border-t border-border">
               <h3 className="text-2xl font-bold text-foreground mb-4">More Articles Coming Soon</h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                I'm constantly working on new content covering AI development, software architecture, 
+                I'm constantly working on new content covering AI development, software architecture,
                 and emerging technologies. Stay tuned for more insights and tutorials.
               </p>
               <NewsletterDialog>
