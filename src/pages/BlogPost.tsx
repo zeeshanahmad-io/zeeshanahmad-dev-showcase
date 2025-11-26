@@ -4,12 +4,13 @@ import { ArrowLeft, Share2, Calendar, User, Clock, List, ArrowRight, Bell } from
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import Markdoc, { Tag } from '@markdoc/markdoc';
 import { getPostBySlug, formatDate, type BlogPost as BlogPostType } from '@/utils/blogUtils';
 
 import { NewsletterDialog } from '@/components/NewsletterDialog';
 import { Helmet } from 'react-helmet-async';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface TableOfContentsItem {
   id: string;
@@ -305,103 +306,192 @@ const BlogPost = () => {
                 )}
 
                 <div className="prose prose-lg max-w-none dark:prose-invert">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      h1: () => null,
-                      h2: ({ children, ...props }) => {
-                        const index = tableOfContents.findIndex(item => item.title === children?.toString());
-                        const id = index >= 0 ? `heading-${index}` : undefined;
-                        const isFirstH2 = index === 0;
-                        return (
-                          <>
-                            {isFirstH2 && post.featured_image && (
-                              <div className="mb-12">
-                                <img
-                                  src={post.featured_image}
-                                  alt={post.title}
-                                  className="w-full rounded-lg shadow-lg"
-                                />
-                              </div>
-                            )}
-                            <h2
-                              id={id}
-                              className="text-2xl font-semibold mb-4 mt-8 text-primary scroll-mt-24"
-                              {...props}
-                            >
-                              {children}
-                            </h2>
-                          </>
-                        );
+                  {(() => {
+                    const ast = Markdoc.parse(post.content);
+                    const content = Markdoc.transform(ast, {
+                      nodes: {
+                        heading: { render: 'Heading', attributes: { level: { type: Number } } },
+                        paragraph: { render: 'Paragraph' },
+                        list: { render: 'List', attributes: { ordered: { type: Boolean } } },
+                        item: { render: 'ListItem' },
+                        fence: { render: 'CodeBlock', attributes: { language: { type: String }, content: { type: String } } },
+                        code: { render: 'InlineCode', attributes: { content: { type: String } } },
+                        blockquote: { render: 'Blockquote' },
+                        link: { render: 'Link', attributes: { href: { type: String } } },
+                        table: { render: 'Table' },
+                        thead: { render: 'TableHead' },
+                        tbody: { render: 'TableBody' },
+                        tr: { render: 'TableRow' },
+                        th: { render: 'TableHeader' },
+                        td: { render: 'TableCell' },
+                        image: { render: 'Image', attributes: { src: { type: String }, alt: { type: String }, title: { type: String } } },
                       },
-                      h3: ({ children, ...props }) => {
-                        const index = tableOfContents.findIndex(item => item.title === children?.toString());
-                        const id = index >= 0 ? `heading-${index}` : undefined;
-                        return (
-                          <h3
-                            id={id}
-                            className="text-xl font-semibold mb-3 mt-6 text-foreground scroll-mt-24"
-                            {...props}
+                      tags: {
+                        table: {
+                          render: 'Table',
+                          transform(node, config) {
+                            const children = node.transformChildren(config);
+
+                            // Filter out non-list children (like thematic breaks) and ensure they are Tags
+                            const lists = children.filter((child): child is Tag =>
+                              child instanceof Tag && (child.name === 'List' || child.name === 'list')
+                            );
+
+                            // If no lists found (e.g. standard table or other content), render as div to avoid invalid nesting
+                            if (lists.length === 0) return new Tag('div', {}, children);
+
+                            // First list is the header
+                            const headerList = lists[0];
+                            const headerItems = headerList.children.filter((child): child is Tag =>
+                              child instanceof Tag && (child.name === 'ListItem' || child.name === 'item')
+                            );
+
+                            const thead = new Tag('TableHead', {}, [
+                              new Tag('TableRow', {},
+                                headerItems.map((item) =>
+                                  new Tag('TableHeader', {}, item.children)
+                                )
+                              )
+                            ]);
+
+                            // Remaining lists are body rows
+                            const bodyLists = lists.slice(1);
+                            const tbody = new Tag('TableBody', {},
+                              bodyLists.map((list) => {
+                                const listItems = list.children.filter((child): child is Tag =>
+                                  child instanceof Tag && (child.name === 'ListItem' || child.name === 'item')
+                                );
+                                return new Tag('TableRow', {},
+                                  listItems.map((item) =>
+                                    new Tag('TableCell', {}, item.children)
+                                  )
+                                )
+                              })
+                            );
+
+                            return new Tag('Table', {}, [thead, tbody]);
+                          }
+                        },
+                      }
+                    });
+                    return Markdoc.renderers.react(content, React, {
+                      components: {
+                        Heading: ({ level, children }: { level: number, children: React.ReactNode }) => {
+                          const text = React.Children.toArray(children).join('');
+                          const index = tableOfContents.findIndex(item => item.title === text);
+                          const id = index >= 0 ? `heading-${index}` : undefined;
+
+                          if (level === 2) {
+                            const isFirstH2 = index === 0;
+                            return (
+                              <>
+                                {isFirstH2 && post.featured_image && (
+                                  <div className="mb-12">
+                                    <img
+                                      src={post.featured_image}
+                                      alt={post.title}
+                                      className="w-full rounded-lg shadow-lg"
+                                    />
+                                  </div>
+                                )}
+                                <h2
+                                  id={id}
+                                  className="text-2xl font-semibold mb-4 mt-8 text-primary scroll-mt-24"
+                                >
+                                  {children}
+                                </h2>
+                              </>
+                            );
+                          }
+                          if (level === 3) {
+                            return (
+                              <h3
+                                id={id}
+                                className="text-xl font-semibold mb-3 mt-6 text-foreground scroll-mt-24"
+                              >
+                                {children}
+                              </h3>
+                            );
+                          }
+                          return null;
+                        },
+                        Paragraph: ({ children }: { children: React.ReactNode }) => (
+                          <p className="mb-4 text-muted-foreground leading-relaxed">{children}</p>
+                        ),
+                        List: ({ ordered, children }: { ordered: boolean, children: React.ReactNode }) => {
+                          return ordered ? (
+                            <ol className="mb-4 ml-6 list-decimal text-muted-foreground">{children}</ol>
+                          ) : (
+                            <ul className="mb-4 ml-6 list-disc text-muted-foreground">{children}</ul>
+                          );
+                        },
+                        ListItem: ({ children }: { children: React.ReactNode }) => (
+                          <li className="mb-1">{children}</li>
+                        ),
+                        CodeBlock: ({ children, language, content }: { children?: React.ReactNode, language: string, content?: string }) => {
+                          const codeContent = content || (typeof children === 'string' ? children : '');
+                          return (
+                            <div className="mb-4 rounded-lg overflow-hidden border border-border">
+                              <SyntaxHighlighter
+                                language={language || 'text'}
+                                style={vscDarkPlus}
+                                customStyle={{ margin: 0, borderRadius: 0 }}
+                                showLineNumbers={true}
+                                wrapLines={true}
+                              >
+                                {codeContent}
+                              </SyntaxHighlighter>
+                            </div>
+                          );
+                        },
+                        InlineCode: ({ children, content }: { children?: React.ReactNode, content?: string }) => (
+                          <code className="px-1.5 py-0.5 bg-muted text-foreground rounded text-sm font-mono">
+                            {content || children}
+                          </code>
+                        ),
+                        Blockquote: ({ children }: { children: React.ReactNode }) => (
+                          <blockquote className="border-l-4 border-primary pl-4 py-2 mb-4 bg-muted/50 rounded-r">
+                            {children}
+                          </blockquote>
+                        ),
+                        Link: ({ href, children }: { href: string, children: React.ReactNode }) => (
+                          <a
+                            href={href}
+                            className="text-primary underline hover:opacity-80"
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             {children}
-                          </h3>
-                        );
-                      },
-                      p: ({ children }) => (
-                        <p className="mb-4 text-muted-foreground leading-relaxed">{children}</p>
-                      ),
-                      ul: ({ children }) => (
-                        <ul className="mb-4 ml-6 list-disc text-muted-foreground">{children}</ul>
-                      ),
-                      ol: ({ children }) => (
-                        <ol className="mb-4 ml-6 list-decimal text-muted-foreground">{children}</ol>
-                      ),
-                      li: ({ children }) => (
-                        <li className="mb-1">{children}</li>
-                      ),
-                      code: ({ children, className }) => {
-                        const isInlineCode = !className;
-                        if (isInlineCode) {
-                          return (
-                            <code className="px-1.5 py-0.5 bg-muted text-foreground rounded text-sm font-mono">
-                              {children}
-                            </code>
-                          );
-                        }
-                        return (
-                          <pre className="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
-                            <code className="text-foreground font-mono text-sm">{children}</code>
-                          </pre>
-                        );
-                      },
-                      blockquote: ({ children }) => (
-                        <blockquote className="border-l-4 border-primary pl-4 py-2 mb-4 bg-muted/50 rounded-r">
-                          {children}
-                        </blockquote>
-                      ),
-                      table: ({ children }) => (
-                        <div className="my-6 overflow-x-auto rounded-lg border border-border">
-                          <table className="w-full text-left">{children}</table>
-                        </div>
-                      ),
-                      thead: ({ children }) => <thead className="bg-muted/50">{children}</thead>,
-                      tr: ({ children }) => <tr className="border-b border-border last:border-b-0">{children}</tr>,
-                      th: ({ children }) => <th className="p-4 font-semibold text-foreground">{children}</th>,
-                      td: ({ children }) => <td className="p-4 align-top text-muted-foreground">{children}</td>,
-                      a: ({ children, href }) => (
-                        <a
-                          href={href}
-                          className="text-primary underline hover:opacity-80"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {children}
-                        </a>
-                      ),
-                    }}
-                  >
-                    {post.content}
-                  </ReactMarkdown>
+                          </a>
+                        ),
+                        Table: ({ children }: { children: React.ReactNode }) => (
+                          <div className="my-6 overflow-x-auto rounded-lg border border-border">
+                            <table className="w-full text-left">{children}</table>
+                          </div>
+                        ),
+                        TableHead: ({ children }: { children: React.ReactNode }) => <thead className="bg-muted/50">{children}</thead>,
+                        TableBody: ({ children }: { children: React.ReactNode }) => <tbody>{children}</tbody>,
+                        TableRow: ({ children }: { children: React.ReactNode }) => <tr className="border-b border-border last:border-b-0">{children}</tr>,
+                        TableHeader: ({ children }: { children: React.ReactNode }) => <th className="p-4 font-semibold text-foreground">{children}</th>,
+                        TableCell: ({ children }: { children: React.ReactNode }) => <td className="p-4 align-top text-muted-foreground">{children}</td>,
+                        Image: ({ src, alt, title }: { src: string, alt: string, title?: string }) => (
+                          <figure className="my-8">
+                            <img
+                              src={src}
+                              alt={alt}
+                              title={title}
+                              className="w-full rounded-lg shadow-lg border border-border"
+                            />
+                            {title && (
+                              <figcaption className="text-center text-sm text-muted-foreground mt-2">
+                                {title}
+                              </figcaption>
+                            )}
+                          </figure>
+                        ),
+                      }
+                    });
+                  })()}
                 </div>
               </div>
             </div>
