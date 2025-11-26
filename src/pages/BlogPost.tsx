@@ -364,197 +364,195 @@ const BlogPost = () => {
                   </div>
                 )}
 
-                <div className="container mx-auto px-4 sm:px-6">
-                  <div className="max-w-4xl mx-auto">
-                    <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground">
-                      {(() => {
-                        const ast = Markdoc.parse(post.content);
-                        const content = Markdoc.transform(ast, {
-                          nodes: {
-                            heading: { render: 'Heading', attributes: { level: { type: Number } } },
-                            paragraph: { render: 'Paragraph' },
-                            list: { render: 'List', attributes: { ordered: { type: Boolean } } },
-                            item: { render: 'ListItem' },
-                            fence: { render: 'CodeBlock', attributes: { language: { type: String }, content: { type: String } } },
-                            code: { render: 'InlineCode', attributes: { content: { type: String } } },
-                            blockquote: { render: 'Blockquote' },
-                            link: { render: 'Link', attributes: { href: { type: String } } },
-                            table: { render: 'Table' },
-                            thead: { render: 'TableHead' },
-                            tbody: { render: 'TableBody' },
-                            tr: { render: 'TableRow' },
-                            th: { render: 'TableHeader' },
-                            td: { render: 'TableCell' },
-                            image: { render: 'Image', attributes: { src: { type: String }, alt: { type: String }, title: { type: String } } },
-                          },
-                          tags: {
-                            table: {
-                              render: 'Table',
-                              transform(node, config) {
-                                const children = node.transformChildren(config);
+                <div className="max-w-4xl">
+                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground">
+                    {(() => {
+                      const ast = Markdoc.parse(post.content);
+                      const content = Markdoc.transform(ast, {
+                        nodes: {
+                          heading: { render: 'Heading', attributes: { level: { type: Number } } },
+                          paragraph: { render: 'Paragraph' },
+                          list: { render: 'List', attributes: { ordered: { type: Boolean } } },
+                          item: { render: 'ListItem' },
+                          fence: { render: 'CodeBlock', attributes: { language: { type: String }, content: { type: String } } },
+                          code: { render: 'InlineCode', attributes: { content: { type: String } } },
+                          blockquote: { render: 'Blockquote' },
+                          link: { render: 'Link', attributes: { href: { type: String } } },
+                          table: { render: 'Table' },
+                          thead: { render: 'TableHead' },
+                          tbody: { render: 'TableBody' },
+                          tr: { render: 'TableRow' },
+                          th: { render: 'TableHeader' },
+                          td: { render: 'TableCell' },
+                          image: { render: 'Image', attributes: { src: { type: String }, alt: { type: String }, title: { type: String } } },
+                        },
+                        tags: {
+                          table: {
+                            render: 'Table',
+                            transform(node, config) {
+                              const children = node.transformChildren(config);
 
-                                // Filter out non-list children (like thematic breaks) and ensure they are Tags
-                                const lists = children.filter((child): child is Tag =>
-                                  child instanceof Tag && (child.name === 'List' || child.name === 'list')
-                                );
+                              // Filter out non-list children (like thematic breaks) and ensure they are Tags
+                              const lists = children.filter((child): child is Tag =>
+                                child instanceof Tag && (child.name === 'List' || child.name === 'list')
+                              );
 
-                                // If no lists found (e.g. standard table or other content), render as div to avoid invalid nesting
-                                if (lists.length === 0) return new Tag('div', {}, children);
+                              // If no lists found (e.g. standard table or other content), render as div to avoid invalid nesting
+                              if (lists.length === 0) return new Tag('div', {}, children);
 
-                                // First list is the header
-                                const headerList = lists[0];
-                                const headerItems = headerList.children.filter((child): child is Tag =>
-                                  child instanceof Tag && (child.name === 'ListItem' || child.name === 'item')
-                                );
+                              // First list is the header
+                              const headerList = lists[0];
+                              const headerItems = headerList.children.filter((child): child is Tag =>
+                                child instanceof Tag && (child.name === 'ListItem' || child.name === 'item')
+                              );
 
-                                const thead = new Tag('TableHead', {}, [
-                                  new Tag('TableRow', {},
-                                    headerItems.map((item) =>
-                                      new Tag('TableHeader', {}, item.children)
+                              const thead = new Tag('TableHead', {}, [
+                                new Tag('TableRow', {},
+                                  headerItems.map((item) =>
+                                    new Tag('TableHeader', {}, item.children)
+                                  )
+                                )
+                              ]);
+
+                              // Remaining lists are body rows
+                              const bodyLists = lists.slice(1);
+                              const tbody = new Tag('TableBody', {},
+                                bodyLists.map((list) => {
+                                  const listItems = list.children.filter((child): child is Tag =>
+                                    child instanceof Tag && (child.name === 'ListItem' || child.name === 'item')
+                                  );
+                                  return new Tag('TableRow', {},
+                                    listItems.map((item) =>
+                                      new Tag('TableCell', {}, item.children)
                                     )
                                   )
-                                ]);
+                                })
+                              );
 
-                                // Remaining lists are body rows
-                                const bodyLists = lists.slice(1);
-                                const tbody = new Tag('TableBody', {},
-                                  bodyLists.map((list) => {
-                                    const listItems = list.children.filter((child): child is Tag =>
-                                      child instanceof Tag && (child.name === 'ListItem' || child.name === 'item')
-                                    );
-                                    return new Tag('TableRow', {},
-                                      listItems.map((item) =>
-                                        new Tag('TableCell', {}, item.children)
-                                      )
-                                    )
-                                  })
-                                );
+                              return new Tag('Table', {}, [thead, tbody]);
+                            }
+                          },
+                        }
+                      });
+                      return Markdoc.renderers.react(content, React, {
+                        components: {
+                          Heading: ({ level, children }: { level: number, children: React.ReactNode }) => {
+                            const text = React.Children.toArray(children).join('');
+                            const index = tableOfContents.findIndex(item => item.title === text);
+                            const id = index >= 0 ? `heading-${index}` : undefined;
 
-                                return new Tag('Table', {}, [thead, tbody]);
-                              }
-                            },
-                          }
-                        });
-                        return Markdoc.renderers.react(content, React, {
-                          components: {
-                            Heading: ({ level, children }: { level: number, children: React.ReactNode }) => {
-                              const text = React.Children.toArray(children).join('');
-                              const index = tableOfContents.findIndex(item => item.title === text);
-                              const id = index >= 0 ? `heading-${index}` : undefined;
-
-                              if (level === 2) {
-                                const isFirstH2 = index === 0;
-                                return (
-                                  <>
-                                    {isFirstH2 && post.featured_image && (
-                                      <div className="mb-12">
-                                        <img
-                                          src={post.featured_image}
-                                          alt={post.title}
-                                          className="w-full rounded-lg shadow-lg"
-                                        />
-                                      </div>
-                                    )}
-                                    <h2
-                                      id={id}
-                                      className="text-2xl font-semibold mb-4 mt-8 text-primary scroll-mt-24"
-                                    >
-                                      {children}
-                                    </h2>
-                                  </>
-                                );
-                              }
-                              if (level === 3) {
-                                return (
-                                  <h3
+                            if (level === 2) {
+                              const isFirstH2 = index === 0;
+                              return (
+                                <>
+                                  {isFirstH2 && post.featured_image && (
+                                    <div className="mb-12">
+                                      <img
+                                        src={post.featured_image}
+                                        alt={post.title}
+                                        className="w-full rounded-lg shadow-lg"
+                                      />
+                                    </div>
+                                  )}
+                                  <h2
                                     id={id}
-                                    className="text-xl font-semibold mb-3 mt-6 text-foreground scroll-mt-24"
+                                    className="text-2xl font-semibold mb-4 mt-8 text-primary scroll-mt-24"
                                   >
                                     {children}
-                                  </h3>
-                                );
-                              }
-                              return null;
-                            },
-                            Paragraph: ({ children }: { children: React.ReactNode }) => (
-                              <p className="mb-4 text-muted-foreground leading-relaxed">{children}</p>
-                            ),
-                            List: ({ ordered, children }: { ordered: boolean, children: React.ReactNode }) => {
-                              return ordered ? (
-                                <ol className="mb-4 ml-6 list-decimal text-muted-foreground">{children}</ol>
-                              ) : (
-                                <ul className="mb-4 ml-6 list-disc text-muted-foreground">{children}</ul>
+                                  </h2>
+                                </>
                               );
-                            },
-                            ListItem: ({ children }: { children: React.ReactNode }) => (
-                              <li className="mb-1">{children}</li>
-                            ),
-                            CodeBlock: ({ children, language, content }: { children?: React.ReactNode, language: string, content?: string }) => {
-                              const codeContent = content || (typeof children === 'string' ? children : '');
+                            }
+                            if (level === 3) {
                               return (
-                                <div className="mb-4 rounded-lg overflow-hidden border border-border">
-                                  <SyntaxHighlighter
-                                    language={language || 'text'}
-                                    style={vscDarkPlus}
-                                    customStyle={{ margin: 0, borderRadius: 0 }}
-                                    showLineNumbers={true}
-                                    wrapLines={true}
-                                    wrapLongLines={true}
-                                  >
-                                    {codeContent}
-                                  </SyntaxHighlighter>
-                                </div>
+                                <h3
+                                  id={id}
+                                  className="text-xl font-semibold mb-3 mt-6 text-foreground scroll-mt-24"
+                                >
+                                  {children}
+                                </h3>
                               );
-                            },
-                            InlineCode: ({ children, content }: { children?: React.ReactNode, content?: string }) => (
-                              <code className="px-1.5 py-0.5 bg-muted text-foreground rounded text-sm font-mono">
-                                {content || children}
-                              </code>
-                            ),
-                            Blockquote: ({ children }: { children: React.ReactNode }) => (
-                              <blockquote className="border-l-4 border-primary pl-4 py-2 mb-4 bg-muted/50 rounded-r">
-                                {children}
-                              </blockquote>
-                            ),
-                            Link: ({ href, children }: { href: string, children: React.ReactNode }) => (
-                              <a
-                                href={href}
-                                className="text-primary underline hover:opacity-80"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {children}
-                              </a>
-                            ),
-                            Table: ({ children }: { children: React.ReactNode }) => (
-                              <div className="my-6 overflow-x-auto rounded-lg border border-border">
-                                <table className="w-full text-left">{children}</table>
+                            }
+                            return null;
+                          },
+                          Paragraph: ({ children }: { children: React.ReactNode }) => (
+                            <p className="mb-4 text-muted-foreground leading-relaxed">{children}</p>
+                          ),
+                          List: ({ ordered, children }: { ordered: boolean, children: React.ReactNode }) => {
+                            return ordered ? (
+                              <ol className="mb-4 ml-6 list-decimal text-muted-foreground">{children}</ol>
+                            ) : (
+                              <ul className="mb-4 ml-6 list-disc text-muted-foreground">{children}</ul>
+                            );
+                          },
+                          ListItem: ({ children }: { children: React.ReactNode }) => (
+                            <li className="mb-1">{children}</li>
+                          ),
+                          CodeBlock: ({ children, language, content }: { children?: React.ReactNode, language: string, content?: string }) => {
+                            const codeContent = content || (typeof children === 'string' ? children : '');
+                            return (
+                              <div className="mb-4 rounded-lg overflow-hidden border border-border">
+                                <SyntaxHighlighter
+                                  language={language || 'text'}
+                                  style={vscDarkPlus}
+                                  customStyle={{ margin: 0, borderRadius: 0 }}
+                                  showLineNumbers={true}
+                                  wrapLines={true}
+                                  wrapLongLines={true}
+                                >
+                                  {codeContent}
+                                </SyntaxHighlighter>
                               </div>
-                            ),
-                            TableHead: ({ children }: { children: React.ReactNode }) => <thead className="bg-muted/50">{children}</thead>,
-                            TableBody: ({ children }: { children: React.ReactNode }) => <tbody>{children}</tbody>,
-                            TableRow: ({ children }: { children: React.ReactNode }) => <tr className="border-b border-border last:border-b-0">{children}</tr>,
-                            TableHeader: ({ children }: { children: React.ReactNode }) => <th className="p-4 font-semibold text-foreground">{children}</th>,
-                            TableCell: ({ children }: { children: React.ReactNode }) => <td className="p-4 align-top text-muted-foreground">{children}</td>,
-                            Image: ({ src, alt, title }: { src: string, alt: string, title?: string }) => (
-                              <figure className="my-8">
-                                <img
-                                  src={src}
-                                  alt={alt}
-                                  title={title}
-                                  className="w-full rounded-lg shadow-lg border border-border"
-                                />
-                                {title && (
-                                  <figcaption className="text-center text-sm text-muted-foreground mt-2">
-                                    {title}
-                                  </figcaption>
-                                )}
-                              </figure>
-                            ),
-                          }
-                        });
-                      })()}
-                    </div>
+                            );
+                          },
+                          InlineCode: ({ children, content }: { children?: React.ReactNode, content?: string }) => (
+                            <code className="px-1.5 py-0.5 bg-muted text-foreground rounded text-sm font-mono">
+                              {content || children}
+                            </code>
+                          ),
+                          Blockquote: ({ children }: { children: React.ReactNode }) => (
+                            <blockquote className="border-l-4 border-primary pl-4 py-2 mb-4 bg-muted/50 rounded-r">
+                              {children}
+                            </blockquote>
+                          ),
+                          Link: ({ href, children }: { href: string, children: React.ReactNode }) => (
+                            <a
+                              href={href}
+                              className="text-primary underline hover:opacity-80"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {children}
+                            </a>
+                          ),
+                          Table: ({ children }: { children: React.ReactNode }) => (
+                            <div className="my-6 overflow-x-auto rounded-lg border border-border">
+                              <table className="w-full text-left">{children}</table>
+                            </div>
+                          ),
+                          TableHead: ({ children }: { children: React.ReactNode }) => <thead className="bg-muted/50">{children}</thead>,
+                          TableBody: ({ children }: { children: React.ReactNode }) => <tbody>{children}</tbody>,
+                          TableRow: ({ children }: { children: React.ReactNode }) => <tr className="border-b border-border last:border-b-0">{children}</tr>,
+                          TableHeader: ({ children }: { children: React.ReactNode }) => <th className="p-4 font-semibold text-foreground">{children}</th>,
+                          TableCell: ({ children }: { children: React.ReactNode }) => <td className="p-4 align-top text-muted-foreground">{children}</td>,
+                          Image: ({ src, alt, title }: { src: string, alt: string, title?: string }) => (
+                            <figure className="my-8">
+                              <img
+                                src={src}
+                                alt={alt}
+                                title={title}
+                                className="w-full rounded-lg shadow-lg border border-border"
+                              />
+                              {title && (
+                                <figcaption className="text-center text-sm text-muted-foreground mt-2">
+                                  {title}
+                                </figcaption>
+                              )}
+                            </figure>
+                          ),
+                        }
+                      });
+                    })()}
                   </div>
                 </div>
               </div>
