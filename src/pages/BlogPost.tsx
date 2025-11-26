@@ -229,7 +229,7 @@ const BlogPost = () => {
         </script>
       </Helmet>
 
-      <main className="pt-20 overflow-x-hidden">
+      <main className="pt-20">
         {/* Article Header */}
         <header className="py-12 bg-gradient-to-b from-background to-muted/30">
           <div className="container mx-auto px-6">
@@ -364,7 +364,7 @@ const BlogPost = () => {
                   </div>
                 )}
 
-                <div className="max-w-4xl">
+                <div className="max-w-4xl mx-auto w-full">
                   <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground">
                     {(() => {
                       const ast = Markdoc.parse(post.content);
