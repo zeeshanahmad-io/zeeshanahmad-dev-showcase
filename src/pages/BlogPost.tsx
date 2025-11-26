@@ -312,8 +312,8 @@ const BlogPost = () => {
                         paragraph: { render: 'Paragraph' },
                         list: { render: 'List', attributes: { ordered: { type: Boolean } } },
                         item: { render: 'ListItem' },
-                        fence: { render: 'CodeBlock', attributes: { language: { type: String } } },
-                        code: { render: 'InlineCode' },
+                        fence: { render: 'CodeBlock', attributes: { language: { type: String }, content: { type: String } } },
+                        code: { render: 'InlineCode', attributes: { content: { type: String } } },
                         blockquote: { render: 'Blockquote' },
                         link: { render: 'Link', attributes: { href: { type: String } } },
                         table: { render: 'Table' },
@@ -426,14 +426,14 @@ const BlogPost = () => {
                         ListItem: ({ children }: { children: React.ReactNode }) => (
                           <li className="mb-1">{children}</li>
                         ),
-                        CodeBlock: ({ children, language }: { children: React.ReactNode, language: string }) => (
+                        CodeBlock: ({ children, language, content }: { children?: React.ReactNode, language: string, content?: string }) => (
                           <pre className="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
-                            <code className="text-foreground font-mono text-sm">{children}</code>
+                            <code className="text-foreground font-mono text-sm">{content || children}</code>
                           </pre>
                         ),
-                        InlineCode: ({ children }: { children: React.ReactNode }) => (
+                        InlineCode: ({ children, content }: { children?: React.ReactNode, content?: string }) => (
                           <code className="px-1.5 py-0.5 bg-muted text-foreground rounded text-sm font-mono">
-                            {children}
+                            {content || children}
                           </code>
                         ),
                         Blockquote: ({ children }: { children: React.ReactNode }) => (
