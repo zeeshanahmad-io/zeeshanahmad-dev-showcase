@@ -9,6 +9,8 @@ import { getPostBySlug, formatDate, type BlogPost as BlogPostType } from '@/util
 
 import { NewsletterDialog } from '@/components/NewsletterDialog';
 import { Helmet } from 'react-helmet-async';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface TableOfContentsItem {
   id: string;
@@ -426,11 +428,22 @@ const BlogPost = () => {
                         ListItem: ({ children }: { children: React.ReactNode }) => (
                           <li className="mb-1">{children}</li>
                         ),
-                        CodeBlock: ({ children, language, content }: { children?: React.ReactNode, language: string, content?: string }) => (
-                          <pre className="bg-muted p-4 rounded-lg overflow-x-auto mb-4">
-                            <code className="text-foreground font-mono text-sm">{content || children}</code>
-                          </pre>
-                        ),
+                        CodeBlock: ({ children, language, content }: { children?: React.ReactNode, language: string, content?: string }) => {
+                          const codeContent = content || (typeof children === 'string' ? children : '');
+                          return (
+                            <div className="mb-4 rounded-lg overflow-hidden border border-border">
+                              <SyntaxHighlighter
+                                language={language || 'text'}
+                                style={vscDarkPlus}
+                                customStyle={{ margin: 0, borderRadius: 0 }}
+                                showLineNumbers={true}
+                                wrapLines={true}
+                              >
+                                {codeContent}
+                              </SyntaxHighlighter>
+                            </div>
+                          );
+                        },
                         InlineCode: ({ children, content }: { children?: React.ReactNode, content?: string }) => (
                           <code className="px-1.5 py-0.5 bg-muted text-foreground rounded text-sm font-mono">
                             {content || children}
