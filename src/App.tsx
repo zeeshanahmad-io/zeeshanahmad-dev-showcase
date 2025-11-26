@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 import Landing from "./pages/Landing";
 import Portfolio from "./pages/Portfolio";
 import Resume from "./pages/Resume";
@@ -7,9 +7,11 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 import FloatingNav from "./components/FloatingNav";
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => (
   <>
+    <ScrollToTop />
     <FloatingNav />
     <Routes>
       <Route path="/" element={<Landing />} />

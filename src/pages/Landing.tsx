@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { useRef, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Briefcase, GraduationCap, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import logo from '@/assets/logo.png';
@@ -60,7 +60,7 @@ const Landing = () => {
       y: 0,
       opacity: 1,
       filter: "blur(0px)",
-      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }
+      transition: { duration: 0.8, ease: "easeOut" }
     }
   };
 
@@ -159,7 +159,7 @@ const Landing = () => {
                 <div className="space-y-4">
                   <div className="flex items-start gap-4 group">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                      <span className="text-2xl">💼</span>
+                      <Briefcase className="w-6 h-6 text-primary" />
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-1 text-foreground">Current Role</h3>
@@ -169,7 +169,7 @@ const Landing = () => {
 
                   <div className="flex items-start gap-4 group">
                     <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                      <span className="text-2xl">🎓</span>
+                      <GraduationCap className="w-6 h-6 text-accent" />
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-1 text-foreground">Education</h3>
@@ -179,7 +179,7 @@ const Landing = () => {
 
                   <div className="flex items-start gap-4 group">
                     <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary/20 transition-colors">
-                      <span className="text-2xl">🎯</span>
+                      <Target className="w-6 h-6 text-secondary" />
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-1 text-foreground">Focus Area</h3>
