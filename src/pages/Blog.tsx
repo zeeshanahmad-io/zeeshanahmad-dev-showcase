@@ -19,8 +19,10 @@ const Blog = () => {
     const loadPosts = async () => {
       try {
         const allPosts = await getAllPosts();
-        setPosts(allPosts);
-        setFilteredPosts(allPosts);
+        // Filter out any potential nulls or invalid posts that might have slipped through
+        const validPosts = allPosts.filter(post => post && post.title && post.slug);
+        setPosts(validPosts);
+        setFilteredPosts(validPosts);
       } catch (error) {
         console.error('Error loading posts:', error);
       } finally {
