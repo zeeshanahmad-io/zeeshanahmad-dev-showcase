@@ -1,21 +1,22 @@
 ---
-title: 'Optimizing Python Development on macOS: Tools and Workflows'
-excerpt: >-
-  A comprehensive guide to setting up an efficient Python development
-  environment on macOS, including tool recommendations and workflow
-  optimizations for maximum productivity.
+title: "Optimizing Python Development on macOS: Tools and Workflows"
+excerpt: "A comprehensive guide to setting up an efficient Python development environment on macOS, including tool
+recommendations and workflow optimizations for maximum productivity."
 author: Zeeshan Ahmad
 published_date: 2025-01-20
 tags:
-  - Python
-  - macOS
-  - Development Tools
-  - Productivity
+- Python
+- macOS
+- Development Tools
+- Productivity
+featured_image: /images/blogs/macos-python.jpg
 featured: true
 ---
 # Optimizing Python Development on macOS: Tools and Workflows
 
-As developers, our productivity is heavily influenced by our development environment setup. Having worked extensively with Python on macOS for enterprise applications at both Oracle and SAP, I've refined a workflow that maximizes efficiency and minimizes friction.
+As developers, our productivity is heavily influenced by our development environment setup. Having worked extensively
+with Python on macOS for enterprise applications at both Oracle and SAP, I've refined a workflow that maximizes
+efficiency and minimizes friction.
 
 ## Essential Tools for Python Development on macOS
 
@@ -44,7 +45,7 @@ pyenv install 3.12.1
 
 # Set global and local versions
 pyenv global 3.11.7
-pyenv local 3.12.1  # for specific projects
+pyenv local 3.12.1 # for specific projects
 ```
 
 ## Development Environment Setup
@@ -87,14 +88,14 @@ Setting up pre-commit hooks ensures code quality:
 ```yaml
 # .pre-commit-config.yaml
 repos:
-  - repo: https://github.com/psf/black
-    rev: 23.1.0
-    hooks:
-      - id: black
-  - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
-    hooks:
-      - id: flake8
+- repo: https://github.com/psf/black
+rev: 23.1.0
+hooks:
+- id: black
+- repo: https://github.com/pycqa/flake8
+rev: 6.0.0
+hooks:
+- id: flake8
 ```
 
 ### Testing Strategy
@@ -129,10 +130,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.pool import QueuePool
 
 engine = create_engine(
-    database_url,
-    poolclass=QueuePool,
-    pool_size=20,
-    max_overflow=30
+database_url,
+poolclass=QueuePool,
+pool_size=20,
+max_overflow=30
 )
 ```
 
@@ -155,6 +156,9 @@ CMD ["python", "app.py"]
 
 ## Conclusion
 
-A well-configured Python development environment on macOS can significantly boost productivity. The key is finding the right balance between powerful tools and simplicity, ensuring that the setup enhances rather than hinders development workflow.
+A well-configured Python development environment on macOS can significantly boost productivity. The key is finding the
+right balance between powerful tools and simplicity, ensuring that the setup enhances rather than hinders development
+workflow.
 
-These practices have served me well in developing enterprise-grade applications and continue to evolve with new tools and technologies.
+These practices have served me well in developing enterprise-grade applications and continue to evolve with new tools
+and technologies.

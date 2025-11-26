@@ -31,6 +31,7 @@ export default config({
                     formatting: true,
                     dividers: true,
                     links: true,
+                    tables: true,
                     images: {
                         directory: 'public/images/blogs',
                         publicPath: '/images/blogs/',
