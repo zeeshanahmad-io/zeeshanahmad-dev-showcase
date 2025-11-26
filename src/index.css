@@ -7,48 +7,64 @@
 @layer base {
   :root {
     /* Light Theme Color Palette */
-    --background: 0 0% 100%;              /* Pure white background */
-    --foreground: 222 84% 4.9%;           /* Dark text */
-    
-    --card: 0 0% 100%;                    /* White card background */
-    --card-foreground: 222 84% 4.9%;     /* Dark card text */
-    
+    --background: 0 0% 100%;
+    /* Pure white background */
+    --foreground: 222 84% 4.9%;
+    /* Dark text */
+
+    --card: 0 0% 100%;
+    /* White card background */
+    --card-foreground: 222 84% 4.9%;
+    /* Dark card text */
+
     --popover: 0 0% 100%;
     --popover-foreground: 222 84% 4.9%;
-    
+
     /* Brand Colors - Electric Cyan Primary */
-    --primary: 187 100% 45%;              /* Vibrant electric cyan */
-    --primary-foreground: 0 0% 100%;      /* White text on cyan */
-    --primary-glow: 187 100% 55%;         /* Lighter cyan for glow effects */
-    
+    --primary: 187 100% 45%;
+    /* Vibrant electric cyan */
+    --primary-foreground: 0 0% 100%;
+    /* White text on cyan */
+    --primary-glow: 187 100% 55%;
+    /* Lighter cyan for glow effects */
+
     /* Purple Accent for Secondary Actions */
-    --secondary: 267 83% 48%;             /* Electric purple */
-    --secondary-foreground: 0 0% 100%;    /* White text on purple */
-    
+    --secondary: 267 83% 48%;
+    /* Electric purple */
+    --secondary-foreground: 0 0% 100%;
+    /* White text on purple */
+
     /* Subtle Grays for Muted Content */
-    --muted: 210 40% 96%;                 /* Light gray for subtle backgrounds */
-    --muted-foreground: 215 16% 45%;      /* Mid-gray for secondary text */
-    
+    --muted: 210 40% 96%;
+    /* Light gray for subtle backgrounds */
+    --muted-foreground: 215 16% 45%;
+    /* Mid-gray for secondary text */
+
     /* Accent Colors */
-    --accent: 187 100% 45%;               /* Same as primary for consistency */
+    --accent: 187 100% 45%;
+    /* Same as primary for consistency */
     --accent-foreground: 0 0% 100%;
-    
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    
+
     /* Borders and Inputs */
-    --border: 214.3 31.8% 91.4%;         /* Light border color */
-    --input: 214.3 31.8% 91.4%;          /* Input background */
-    --ring: 187 100% 45%;                 /* Focus ring color */
-    
+    --border: 214.3 31.8% 91.4%;
+    /* Light border color */
+    --input: 214.3 31.8% 91.4%;
+    /* Input background */
+    --ring: 187 100% 45%;
+    /* Focus ring color */
+
     /* Design System Extensions */
-    --nav-background: 0 0% 100% / 0.95;   /* Semi-transparent nav */
+    --nav-background: 0 0% 100% / 0.95;
+    /* Semi-transparent nav */
     --hero-gradient: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 40% 96%));
     --card-gradient: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
     --accent-gradient: linear-gradient(135deg, hsl(187 100% 45%), hsl(267 83% 48%));
     --glow-primary: 0 0 30px hsl(187 100% 45% / 0.2);
     --glow-secondary: 0 0 20px hsl(267 83% 48% / 0.15);
-    
+
     /* Spacing and Typography */
     --radius: 0.75rem;
 
@@ -64,42 +80,58 @@
 
   .dark {
     /* Dark Professional Color Palette */
-    --background: 222 15% 7%;             /* Deep charcoal background */
-    --foreground: 210 20% 95%;            /* Crisp white text */
-    
-    --card: 222 15% 10%;                  /* Slightly lighter card background */
-    --card-foreground: 210 20% 95%;       /* White card text */
-    
+    --background: 222 15% 7%;
+    /* Deep charcoal background */
+    --foreground: 210 20% 95%;
+    /* Crisp white text */
+
+    --card: 222 15% 10%;
+    /* Slightly lighter card background */
+    --card-foreground: 210 20% 95%;
+    /* White card text */
+
     --popover: 222 15% 10%;
     --popover-foreground: 210 20% 95%;
-    
+
     /* Brand Colors - Electric Cyan Primary */
-    --primary: 187 100% 65%;              /* Vibrant electric cyan */
-    --primary-foreground: 222 15% 7%;     /* Dark text on cyan */
-    --primary-glow: 187 100% 75%;         /* Lighter cyan for glow effects */
-    
+    --primary: 187 100% 65%;
+    /* Vibrant electric cyan */
+    --primary-foreground: 222 15% 7%;
+    /* Dark text on cyan */
+    --primary-glow: 187 100% 75%;
+    /* Lighter cyan for glow effects */
+
     /* Purple Accent for Secondary Actions */
-    --secondary: 267 83% 58%;             /* Electric purple */
-    --secondary-foreground: 210 20% 95%;  /* White text on purple */
-    
+    --secondary: 267 83% 58%;
+    /* Electric purple */
+    --secondary-foreground: 210 20% 95%;
+    /* White text on purple */
+
     /* Subtle Grays for Muted Content */
-    --muted: 220 13% 18%;                 /* Dark gray for subtle backgrounds */
-    --muted-foreground: 215 16% 65%;      /* Mid-gray for secondary text */
-    
+    --muted: 220 13% 18%;
+    /* Dark gray for subtle backgrounds */
+    --muted-foreground: 215 16% 65%;
+    /* Mid-gray for secondary text */
+
     /* Accent Colors */
-    --accent: 187 100% 65%;               /* Same as primary for consistency */
+    --accent: 187 100% 65%;
+    /* Same as primary for consistency */
     --accent-foreground: 222 15% 7%;
-    
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 20% 95%;
-    
+
     /* Borders and Inputs */
-    --border: 220 13% 25%;                /* Subtle border color */
-    --input: 220 13% 18%;                 /* Input background */
-    --ring: 187 100% 65%;                 /* Focus ring color */
-    
+    --border: 220 13% 25%;
+    /* Subtle border color */
+    --input: 220 13% 18%;
+    /* Input background */
+    --ring: 187 100% 65%;
+    /* Focus ring color */
+
     /* Design System Extensions */
-    --nav-background: 222 15% 7% / 0.95;  /* Semi-transparent nav */
+    --nav-background: 222 15% 7% / 0.95;
+    /* Semi-transparent nav */
     --hero-gradient: linear-gradient(135deg, hsl(222 15% 7%), hsl(220 13% 10%));
     --card-gradient: linear-gradient(145deg, hsl(222 15% 10%), hsl(220 13% 12%));
     --accent-gradient: linear-gradient(135deg, hsl(187 100% 65%), hsl(267 83% 58%));
@@ -123,7 +155,8 @@
     @apply border-border;
   }
 
-  html, body {
+  html,
+  body {
     @apply bg-background text-foreground;
     scroll-behavior: smooth;
     overflow-y: auto;
@@ -151,6 +184,7 @@
 }
 
 @layer components {
+
   /* Hero section styles */
   .hero-title {
     @apply text-5xl md:text-7xl font-bold bg-gradient-to-r from-foreground via-primary to-secondary bg-clip-text text-transparent;
