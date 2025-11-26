@@ -12,6 +12,35 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunks for better caching
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-slot',
+            '@radix-ui/react-toast',
+            '@radix-ui/react-tooltip'
+          ],
+          'markdown': ['@markdoc/markdoc', 'gray-matter', 'react-syntax-highlighter'],
+          'keystatic': ['@keystatic/core']
+        }
+      }
+    },
+    // Increase chunk size warning limit (we're handling it with manual chunks)
+    chunkSizeWarningLimit: 1000,
+    // Enable minification
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: mode === 'production',
+        drop_debugger: mode === 'production'
+      }
+    }
+  },
   plugins: [
     react(),
     nodePolyfills(),

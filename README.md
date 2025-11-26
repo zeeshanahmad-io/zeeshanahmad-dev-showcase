@@ -52,6 +52,29 @@ To run this project locally, follow these steps:
 
 The application will be available at `http://localhost:8080`.
 
+## 📝 Managing Blogs (Keystatic CMS)
+
+This project uses **Keystatic** for content management. It supports a hybrid storage model:
+
+-   **Local Mode (Development):** Edits are saved directly to your local file system (`/blogs/*.mdoc`).
+-   **Cloud Mode (Production):** Edits are saved to the GitHub repository via Keystatic Cloud.
+
+### How to Add/Edit Blogs
+
+1.  **Start the development server:**
+    ```sh
+    npm run dev
+    ```
+2.  **Access the Admin UI:**
+    Open `http://localhost:8080/keystatic` in your browser.
+3.  **Create or Edit:**
+    -   Click on the **Posts** collection.
+    -   Use the visual editor to write your content.
+    -   You can add **Tables**, **Images**, and **Code Blocks** (with syntax highlighting).
+4.  **Save Changes:**
+    -   In **Local Mode**, clicking save updates the `.mdoc` files in your project.
+    -   In **Cloud Mode**, changes are committed to a new branch and a Pull Request is created.
+
 ## 📖 Reader Mode
 
 This project includes a "Reader Mode" feature designed for sharing the blog without exposing the full professional portfolio (Resume/Portfolio).

@@ -25,14 +25,36 @@ export const calculateReadingTime = (content: string): string => {
 const loadMarkdownFile = async (slug: string): Promise<BlogPost | null> => {
   try {
     const response = await fetch(`/blogs/${slug}.mdoc`);
+
+    // Check if the response is valid
     if (!response.ok) {
       console.error(`Failed to fetch /blogs/${slug}.mdoc: ${response.status}`);
       return null;
     }
 
+    // Check content type to avoid parsing HTML (SPA fallback) as markdown
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('text/html')) {
+      console.warn(`Skipping ${slug}: Received HTML instead of markdown (likely SPA fallback)`);
+      return null;
+    }
+
     const markdown = await response.text();
+
+    // Double check if content looks like HTML
+    if (markdown.trim().startsWith('<!DOCTYPE html>') || markdown.trim().startsWith('<html')) {
+      console.warn(`Skipping ${slug}: Content looks like HTML`);
+      return null;
+    }
+
     try {
       const { data, content } = matter(markdown);
+
+      // Validate required fields
+      if (!data.title) {
+        console.warn(`Skipping ${slug}: Missing title in frontmatter`);
+        return null;
+      }
 
       return {
         slug,
@@ -58,11 +80,8 @@ const loadMarkdownFile = async (slug: string): Promise<BlogPost | null> => {
 
 // Available blog posts (these should match the actual markdown files)
 const availablePosts = [
-  'ai-development-trends-2025',
-  'healthcare-platform-architecture',
-  'macos-python-development',
-  'password-management-guide',
-  'claude-code-openrouter-guide'
+  'claude-code-openrouter-guide',
+  'password-management-guide'
 ];
 
 export const getAllPosts = async (): Promise<BlogPost[]> => {
