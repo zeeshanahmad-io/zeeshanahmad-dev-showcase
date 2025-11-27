@@ -120,7 +120,7 @@ const Blog = () => {
                       <img
                         src={featuredPost.featured_image}
                         alt={featuredPost.title}
-                        className="w-full h-full object-cover transition-transform duration-300"
+                        className="w-full h-full object-cover"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-elegant flex items-center justify-center">
@@ -227,7 +227,7 @@ const Blog = () => {
                         <img
                           src={post.featured_image}
                           alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-300"
+                          className="w-full h-full object-cover"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-elegant flex items-center justify-center">
