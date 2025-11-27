@@ -376,7 +376,7 @@ const BlogPost = () => {
                 )}
 
                 <div className="max-w-4xl mx-auto w-full" style={{ minWidth: 0, boxSizing: 'border-box', paddingLeft: '0.75rem', paddingRight: '0.75rem' }}>
-                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word', maxWidth: '100%', boxSizing: 'border-box', willChange: 'auto' }}>
+                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word', maxWidth: '100%', width: '100%', boxSizing: 'border-box', willChange: 'auto' }}>
                     {(() => {
                       const ast = Markdoc.parse(post.content);
                       const content = Markdoc.transform(ast, {
