@@ -83,22 +83,29 @@ const BlogPost = () => {
   };
 
   useEffect(() => {
-    // Handle scroll spy for active section
-    const handleScroll = () => {
-      if (isScrolling) return;
-      const headings = document.querySelectorAll('h2, h3');
-      const scrollPosition = window.scrollY + 100;
+    // Handle scroll spy for active section with throttling
+    let ticking = false;
 
-      for (let i = headings.length - 1; i >= 0; i--) {
-        const heading = headings[i] as HTMLElement;
-        if (heading.offsetTop <= scrollPosition) {
-          setActiveSection(heading.id);
-          break;
+    const handleScroll = () => {
+      if (isScrolling || ticking) return;
+
+      ticking = true;
+      requestAnimationFrame(() => {
+        const headings = document.querySelectorAll('h2, h3');
+        const scrollPosition = window.scrollY + 100;
+
+        for (let i = headings.length - 1; i >= 0; i--) {
+          const heading = headings[i] as HTMLElement;
+          if (heading.offsetTop <= scrollPosition) {
+            setActiveSection(heading.id);
+            break;
+          }
         }
-      }
+        ticking = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isScrolling]);
 
@@ -364,8 +371,8 @@ const BlogPost = () => {
                   </div>
                 )}
 
-                <div className="max-w-4xl mx-auto w-full">
-                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere' }}>
+                <div className="max-w-4xl mx-auto w-full" style={{ minWidth: 0 }}>
+                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}>
                     {(() => {
                       const ast = Markdoc.parse(post.content);
                       const content = Markdoc.transform(ast, {
