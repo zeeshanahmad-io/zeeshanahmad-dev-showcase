@@ -303,7 +303,7 @@ const BlogPost = () => {
 
         {/* Article Content */}
         <article className="py-12" style={{ willChange: 'auto' }}>
-          <div className="container mx-auto px-1 sm:px-6">
+          <div className="container mx-auto px-3 sm:px-6">
             <div className="flex gap-0 xl:gap-12 mx-auto relative">
               {/* Table of Contents - Desktop Sidebar */}
               {tableOfContents.length > 0 && (
@@ -375,8 +375,8 @@ const BlogPost = () => {
                   </div>
                 )}
 
-                <div className="w-full" style={{ maxWidth: '100%', boxSizing: 'border-box', paddingLeft: '0', paddingRight: '0' }}>
-                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word', maxWidth: '100%', width: '100%', boxSizing: 'border-box', willChange: 'auto' }}>
+                <div className="w-full">
+                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word', width: '100%', boxSizing: 'border-box', willChange: 'auto' }}>
                     {(() => {
                       const ast = Markdoc.parse(post.content);
                       const content = Markdoc.transform(ast, {
