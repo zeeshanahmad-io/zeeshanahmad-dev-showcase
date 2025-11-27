@@ -364,8 +364,8 @@ const BlogPost = () => {
                   </div>
                 )}
 
-                <div className="max-w-4xl mx-auto w-full">
-                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere' }}>
+                <div className="max-w-4xl mx-auto w-full" style={{ minWidth: 0 }}>
+                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}>
                     {(() => {
                       const ast = Markdoc.parse(post.content);
                       const content = Markdoc.transform(ast, {
