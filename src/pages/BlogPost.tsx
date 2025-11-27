@@ -83,22 +83,29 @@ const BlogPost = () => {
   };
 
   useEffect(() => {
-    // Handle scroll spy for active section
-    const handleScroll = () => {
-      if (isScrolling) return;
-      const headings = document.querySelectorAll('h2, h3');
-      const scrollPosition = window.scrollY + 100;
+    // Handle scroll spy for active section with throttling
+    let ticking = false;
 
-      for (let i = headings.length - 1; i >= 0; i--) {
-        const heading = headings[i] as HTMLElement;
-        if (heading.offsetTop <= scrollPosition) {
-          setActiveSection(heading.id);
-          break;
+    const handleScroll = () => {
+      if (isScrolling || ticking) return;
+
+      ticking = true;
+      requestAnimationFrame(() => {
+        const headings = document.querySelectorAll('h2, h3');
+        const scrollPosition = window.scrollY + 100;
+
+        for (let i = headings.length - 1; i >= 0; i--) {
+          const heading = headings[i] as HTMLElement;
+          if (heading.offsetTop <= scrollPosition) {
+            setActiveSection(heading.id);
+            break;
+          }
         }
-      }
+        ticking = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isScrolling]);
 
