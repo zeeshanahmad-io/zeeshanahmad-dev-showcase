@@ -292,7 +292,7 @@ const BlogPost = () => {
 
         {/* Article Content */}
         <article className="py-12">
-          <div className="container mx-auto px-6">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="flex gap-12 max-w-7xl mx-auto relative">
               {/* Table of Contents - Desktop Sidebar */}
               {tableOfContents.length > 0 && (
