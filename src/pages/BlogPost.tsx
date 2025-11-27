@@ -83,6 +83,10 @@ const BlogPost = () => {
   };
 
   useEffect(() => {
+    // Disable scroll spy on mobile to prevent flickering
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return;
+
     // Handle scroll spy for active section with throttling
     let ticking = false;
 
@@ -371,8 +375,8 @@ const BlogPost = () => {
                   </div>
                 )}
 
-                <div className="max-w-4xl mx-auto w-full" style={{ minWidth: 0 }}>
-                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}>
+                <div className="max-w-4xl mx-auto w-full" style={{ minWidth: 0, boxSizing: 'border-box' }}>
+                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word', maxWidth: '100%', boxSizing: 'border-box' }}>
                     {(() => {
                       const ast = Markdoc.parse(post.content);
                       const content = Markdoc.transform(ast, {
