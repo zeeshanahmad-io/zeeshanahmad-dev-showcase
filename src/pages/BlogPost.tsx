@@ -303,7 +303,7 @@ const BlogPost = () => {
 
         {/* Article Content */}
         <article className="py-12" style={{ willChange: 'auto' }}>
-          <div className="container mx-auto px-1 sm:px-6">
+          <div className="container mx-auto px-3 sm:px-6">
             <div className="flex gap-0 xl:gap-12 mx-auto relative">
               {/* Table of Contents - Desktop Sidebar */}
               {tableOfContents.length > 0 && (
