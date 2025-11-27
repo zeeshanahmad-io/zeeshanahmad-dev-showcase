@@ -277,4 +277,11 @@
   .parallax-bg {
     transform: translateY(calc(var(--scroll) * 0.2px));
   }
+
+  /* Force inline code blocks to wrap */
+  .prose code {
+    word-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
+    white-space: pre-wrap !important;
+  }
 }
