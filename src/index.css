@@ -155,6 +155,12 @@
     @apply border-border;
   }
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   html,
   body {
     @apply bg-background text-foreground;

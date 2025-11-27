@@ -83,6 +83,10 @@ const BlogPost = () => {
   };
 
   useEffect(() => {
+    // Disable scroll spy on mobile to prevent flickering
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return;
+
     // Handle scroll spy for active section with throttling
     let ticking = false;
 
@@ -298,9 +302,9 @@ const BlogPost = () => {
         </header>
 
         {/* Article Content */}
-        <article className="py-12">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex gap-12 max-w-7xl mx-auto relative">
+        <article className="py-12" style={{ willChange: 'auto' }}>
+          <div className="container mx-auto px-1 sm:px-6">
+            <div className="flex gap-0 xl:gap-12 mx-auto relative">
               {/* Table of Contents - Desktop Sidebar */}
               {tableOfContents.length > 0 && (
                 <aside className="hidden xl:block w-80 shrink-0">
@@ -371,8 +375,8 @@ const BlogPost = () => {
                   </div>
                 )}
 
-                <div className="max-w-4xl mx-auto w-full" style={{ minWidth: 0 }}>
-                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}>
+                <div className="w-full" style={{ maxWidth: '100%', boxSizing: 'border-box', paddingLeft: '0', paddingRight: '0' }}>
+                  <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground break-words" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word', maxWidth: '100%', width: '100%', boxSizing: 'border-box', willChange: 'auto' }}>
                     {(() => {
                       const ast = Markdoc.parse(post.content);
                       const content = Markdoc.transform(ast, {
