@@ -304,7 +304,7 @@ const BlogPost = () => {
         {/* Article Content */}
         <article className="py-12" style={{ willChange: 'auto' }}>
           <div className="container mx-auto px-3 sm:px-6">
-            <div className="flex gap-12 max-w-7xl mx-auto relative">
+            <div className="flex gap-0 xl:gap-12 max-w-7xl mx-auto relative">
               {/* Table of Contents - Desktop Sidebar */}
               {tableOfContents.length > 0 && (
                 <aside className="hidden xl:block w-80 shrink-0">
