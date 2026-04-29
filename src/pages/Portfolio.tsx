@@ -15,8 +15,19 @@ import birthdayReminderImg from '@/assets/birthday-reminder-preview.webp';
 const Portfolio = () => {
     const projects = [
         {
+            title: "DocScale",
+            description: "Architected a scalable multi-tenant platform using Next.js and Supabase. Integrated Clerk for enterprise auth and automated provisioning workflows via Edge Functions.",
+            image: docScaleImg,
+            tags: ["React", "TypeScript", "Tailwind CSS", "Markdown", "Healthcare Platform"],
+            links: {
+                live: "https://docscale.in",
+                github: "https://github.com/zeeshanahmad-io/docscale"
+            },
+            status: "Live"
+        },
+        {
             title: "KeepMacAwake",
-            description: "Engineered and launched a native macOS application that prevents a Mac from going to sleep. Built with Python and packaged as a downloadable .dmg file, showcasing skills in native desktop application development.",
+            description: "Designed and deployed a native Python-based utility to manage system power states, successfully acquiring over 100+ active users.",
             image: keepMacAwakeImg,
             tags: ["Python", "macOS", "Desktop App", "Native Development"],
             links: {
@@ -38,37 +49,15 @@ const Portfolio = () => {
             status: "Live"
         },
         {
-            title: "DocScale",
-            description: "Developed a front-end business platform for the digital growth of doctors. This service showcases expertise in building powerful online platforms for the healthcare industry. Features an integrated blog for thought leadership that reads and publishes from markdown files.",
-            image: docScaleImg,
-            tags: ["React", "TypeScript", "Tailwind CSS", "Markdown", "Healthcare Platform"],
-            links: {
-                live: "https://docscale.in",
-                github: "https://github.com/zeeshanahmad-io/docscale"
-            },
-            status: "Live"
-        },
-        {
-            title: "DineView SaaS Platform",
-            description: "Currently building a modern, multi-tenant SaaS platform for the restaurant industry. Built with a scalable stack including Next.js, TypeScript, and Clerk for authentication, and MongoDB Atlas for the database. Features a public marketing site and a secure Super Admin Dashboard for tenant onboarding.",
-            image: dineViewImg,
-            tags: ["Next.js", "TypeScript", "Clerk Auth", "MongoDB", "SaaS", "Multi-tenant"],
-            links: {
-                live: "https://dineview.in",
-                github: "https://github.com/zeeshan1112/dineview"
-            },
-            status: "In Development"
-        },
-        {
             title: "Birthday Reminder Pro",
-            description: "An intelligent iPhone shortcut that has garnered over 114 downloads by providing automated and accurate birthday reminders from contacts. The utility uses 'year-agnostic' logic to ensure timely notifications, showcasing problem-solving beyond traditional development.",
+            description: "Engineered an intelligent iOS automation with 150+ downloads; features year-agnostic logic for accurate contact event management.",
             image: birthdayReminderImg,
             tags: ["iOS Shortcuts", "Automation", "Mobile", "Problem Solving"],
             links: {
                 download: "https://routinehub.co/shortcut/22480/"
             },
             status: "Live",
-            downloads: "114+"
+            downloads: "150+"
         }
     ];
 

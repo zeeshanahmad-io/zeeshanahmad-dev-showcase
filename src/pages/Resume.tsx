@@ -44,7 +44,7 @@ const Resume = () => {
                 "Improved Global Search performance by 80% through dynamic child node fetching"
             ],
             products: ["Oracle Analytics Cloud", "Dataflows", "Semantic Model"],
-            achievements: ["Annually awarded the highest performance rating. (2023, 2024, 2025)"]
+            achievements: ["Consistently recognized as a Top Tier Performer with the highest annual performance rating (2023–2025)."]
         },
         {
             company: "SAP Labs India",
@@ -53,9 +53,9 @@ const Resume = () => {
             location: "Bangalore, India",
             logo: SAPLogo,
             highlights: [
-                "Led team of 2 developers to build end-to-end Translation Service UI using Node.js and SAP UI5",
-                "Contributed to Cloud Native Spring Boot Translation Microservice on SAP Cloud Foundry",
-                "Integrated Translation Service with GitHub V3 REST API for automated translation processes",
+                "SaaS Product Engineering: Directed the UI lifecycle for the Cloud Translation Service using Node.js and SAP UI5.",
+                "Distributed Systems: Developed resilient Java Spring Boot microservices deployed on SAP Cloud Foundry.",
+                "Strategic Support: Served as the primary technical lead for global customer escalations, resolving critical root causes for Fortune 500 clients.",
                 "Developed robust Unit test framework with Karma and Jasmine achieving 85%+ code coverage",
                 "Presented Translation component at industry conferences including SAP TechEd and SAP dKom"
             ],
@@ -74,7 +74,8 @@ const Resume = () => {
             coursework: [
                 "Artificial Intelligence", "Natural Language Processing", "Knowledge-Based AI",
                 "Robotics: AI Techniques", "Game AI", "AI Ethics and Society",
-                "Software Dev Process", "Data Analytics & Security"
+                "Software Dev Process", "Data Analytics & Security",
+                "Intro to Cognitive Science", "Global Entrepreneurship"
             ]
         },
         {
@@ -106,7 +107,7 @@ const Resume = () => {
         {
             icon: Zap,
             title: "Highest Performance Rating",
-            description: "Annually awarded the highest performance rating. (2023, 2024, 2025)"
+            description: "Consistently recognized as a Top Tier Performer with the highest annual performance rating (2023–2025)."
         },
         {
             icon: BookOpen,
