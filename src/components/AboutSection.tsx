@@ -62,15 +62,15 @@ const AboutSection = () => {
               10+ Years of Technical Excellence
             </h3>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              As a Principal Member of Technical Staff at Oracle with over 10 years of experience, 
-              I specialize in architecting and developing AI-driven solutions that solve complex business problems. 
-              My journey spans from building scalable cloud-based systems to pioneering the integration of 
-              advanced AI technologies in enterprise software.
+              As a Principal Platform Software Engineer at Oracle with over 10 years of experience, 
+              I architect and build enterprise AI solutions, stateful multi-agent workflows, and LLM-powered platform capabilities. 
+              My journey spans from building scalable distributed cloud architectures to pioneering the integration of 
+              advanced agentic systems in business applications.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Currently pursuing a Master's degree in Computer Science with specialization in Artificial Intelligence 
-              at Georgia Institute of Technology, I'm deepening my expertise in cutting-edge AI and NLP technologies. 
-              My work has been recognized with prestigious awards and my personal projects have garnered significant adoption.
+              I hold a Master's degree in Computer Science with an Artificial Intelligence specialization 
+              from the Georgia Institute of Technology, graduated with a perfect 4.0 / 4.0 GPA. My academic and 
+              applied engineering research focuses on advanced NLP, knowledge-based AI, and autonomous agent orchestration.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
               I believe in the power of intelligent software to transform industries and am committed to 

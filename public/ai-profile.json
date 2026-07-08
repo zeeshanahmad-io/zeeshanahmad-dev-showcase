@@ -4,23 +4,23 @@
     "name": "Zeeshan Ahmad",
     "url": "https://zeeshanahmad.dev",
     "image": "https://static.toastmynetwork.com/zeeshanahmad.jpg",
-    "jobTitle": "Principal Member of Technical Staff",
+    "jobTitle": "Principal Platform Software Engineer",
     "worksFor": {
         "@type": "Organization",
         "name": "Oracle"
     },
-    "description": "Principal Technical Staff with 10+ years of experience in AI-driven solutions, full-stack development, and enterprise software architecture. Consistently recognized top performer with VP Award and highest performance ratings.",
+    "description": "Principal Platform Software Engineer with 10+ years of experience in AI-driven solutions, full-stack development, and enterprise software architecture. Consistently recognized top performer with VP Award and highest performance ratings.",
     "email": "contact@zeeshanahmad.dev",
     "alumniOf": [
         {
             "@type": "Organization",
             "name": "Georgia Institute of Technology",
-            "description": "Master of Science in Computer Science - Specialization in Machine Learning"
+            "description": "Master of Science in Computer Science - Specialization in Artificial Intelligence"
         },
         {
             "@type": "Organization",
-            "name": "Rochester Institute of Technology",
-            "description": "Bachelor of Science in Software Engineering"
+            "name": "Ramaiah Institute of Technology",
+            "description": "Bachelor of Engineering in Computer Science"
         }
     ],
     "knowsAbout": [
@@ -72,11 +72,11 @@
         {
             "@type": "EducationalOccupationalCredential",
             "credentialCategory": "degree",
-            "name": "Bachelor of Science in Software Engineering",
+            "name": "Bachelor of Engineering in Computer Science",
             "educationalLevel": "Undergraduate",
             "recognizedBy": {
                 "@type": "Organization",
-                "name": "Rochester Institute of Technology"
+                "name": "Ramaiah Institute of Technology"
             }
         }
     ],

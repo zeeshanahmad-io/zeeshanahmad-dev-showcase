@@ -4,7 +4,7 @@ import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 
 const HeroSection = () => {
   const handleDownloadResume = () => {
-    window.open('/resume/resume.pdf', '_blank');
+    window.open('/resume/Zeeshan%20Ahmad%20%E2%80%94%20Principal%20AI%20Engineer%20Resume.pdf', '_blank');
   };
 
   const scrollToPortfolio = () => {
@@ -45,8 +45,8 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 text-center relative z-10 pt-24 md:pt-0">
         {/* Main Headline */}
         <h1 className="hero-title mb-6 animate-fade-in">
-          Principal Member of <br />
-          <span className="text-gradient-accent">Technical Staff</span>
+          Principal AI Engineer &amp; <br />
+          <span className="text-gradient-accent">Agentic Systems Architect</span>
         </h1>
         
         {/* Subtitle */}

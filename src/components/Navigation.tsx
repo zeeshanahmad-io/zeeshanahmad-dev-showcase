@@ -70,7 +70,7 @@ const Navigation = () => {
             <Button
               className="btn-hero"
               onClick={() => {
-                window.open('/resume/resume.pdf', '_blank');
+                window.open('/resume/Zeeshan%20Ahmad%20%E2%80%94%20Principal%20AI%20Engineer%20Resume.pdf', '_blank');
               }}
             >
               <Download className="w-4 h-4 mr-2" />
@@ -109,7 +109,7 @@ const Navigation = () => {
                 <Button
                   className="btn-hero w-full"
                   onClick={() => {
-                    window.open('/resume/resume.pdf', '_blank');
+                    window.open('/resume/Zeeshan%20Ahmad%20%E2%80%94%20Principal%20AI%20Engineer%20Resume.pdf', '_blank');
                     setIsOpen(false);
                   }}
                 >

@@ -31,33 +31,44 @@ const Resume = () => {
     const experience = [
         {
             company: "Oracle India",
-            role: "Principal Member of Technical Staff",
-            period: "January 2021 - Present",
+            role: "Principal Platform Software Engineer",
+            period: "September 2023 - Present",
             location: "Bangalore, India",
             logo: OracleLogo,
             highlights: [
-                "Led core team in developing AI-powered dataflow assistant from scratch using advanced prompt engineering and NLP",
-                "Engineered novel Python-based approach for LLM communication, reducing token size and eliminating syntax bleeding",
-                "Implemented chain-of-thought reasoning and guardrails approach using diagnostic LLM API calls",
-                "Developed sophisticated test framework for AI response validation and LLM benchmarking",
-                "Created custom consistency check feature for semantic models using JSONPath queries",
-                "Improved Global Search performance by 80% through dynamic child node fetching"
+                "LangGraph Workflow Orchestration: Built a stateful orchestration layer for Oracle Analytics semantic modeling, translating user requests into phased execution plans and routing them across specialized subagents with checkpointed state, human-in-the-loop (HITL) interrupts, and retry/replan control flow.",
+                "Codex Plugin & Agent Runtime: Built a Codex plugin for Oracle Analytics with MCP-based tools and hooks, enabling natural-language-driven semantic-model workflows with execution guardrails, validation, and more reliable agent behavior.",
+                "AI Dataflow Assistant: Led development of an AI assistant from the ground up that enabled users to author Oracle Analytics dataflows using natural language.",
+                "LLM Context & Response Optimization: Engineered a Python-based communication layer and Python-like intermediate representation for complex dataflow state, reducing token usage and improving response quality for multi-step workflow generation.",
+                "AI Evaluation & Reliability: Built evaluation workflows and benchmarking harnesses to detect prompt regressions and validate response quality across paraphrased and multi-step user requests."
             ],
             products: ["Oracle Analytics Cloud", "Dataflows", "Semantic Model"],
             achievements: ["Consistently recognized as a Top Tier Performer with the highest annual performance rating (2023–2025)."]
         },
         {
+            company: "Oracle India",
+            role: "Senior Member of Technical Staff",
+            period: "January 2021 - August 2023",
+            location: "Bangalore, India",
+            logo: OracleLogo,
+            highlights: [
+                "Core Architecture Modernization: Overhauled the Semantic Modeler joins architecture and integrated Lucene-based search, significantly improving workspace object discovery and developer productivity.",
+                "Scalable Undo/Redo & Selective Indexing: Designed a Git-backed undo/redo framework for Semantic Modeler with selective Lucene reindexing, reducing memory pressure and avoiding full-workspace restore costs.",
+                "Performance & Engineering Rigor: Improved semantic-model responsiveness through targeted data-fetching optimizations and established a reusable JUnit test framework adopted across the team."
+            ],
+            products: ["Oracle Analytics Cloud", "Semantic Model"],
+            achievements: ["Consistently recognized as a Top Tier Performer with the highest annual performance rating."]
+        },
+        {
             company: "SAP Labs India",
-            role: "Developer → Senior Developer",
+            role: "Developer → Associate Developer",
             period: "August 2015 - January 2021",
             location: "Bangalore, India",
             logo: SAPLogo,
             highlights: [
-                "SaaS Product Engineering: Directed the UI lifecycle for the Cloud Translation Service using Node.js and SAP UI5.",
+                "SaaS Product Engineering: Directed the full UI lifecycle for the Cloud Translation Service using Node.js and SAP UI5.",
                 "Distributed Systems: Developed resilient Java Spring Boot microservices deployed on SAP Cloud Foundry.",
-                "Strategic Support: Served as the primary technical lead for global customer escalations, resolving critical root causes for Fortune 500 clients.",
-                "Developed robust Unit test framework with Karma and Jasmine achieving 85%+ code coverage",
-                "Presented Translation component at industry conferences including SAP TechEd and SAP dKom"
+                "Technical Leadership: Served as the primary technical lead for global customer escalations, resolving critical root causes for Fortune 500 clients."
             ],
             products: ["SAP Analytics Cloud", "SAP Lumira Discovery"],
             achievements: ["VP Award for Translation Service contributions"]
@@ -149,7 +160,7 @@ const Resume = () => {
                     <Button
                         size="lg"
                         className="btn-hero"
-                        onClick={() => window.open('/resume/resume.pdf', '_blank')}
+                        onClick={() => window.open('/resume/Zeeshan%20Ahmad%20%E2%80%94%20Principal%20AI%20Engineer%20Resume.pdf', '_blank')}
                     >
                         <Download className="w-5 h-5 mr-2" />
                         Download PDF
