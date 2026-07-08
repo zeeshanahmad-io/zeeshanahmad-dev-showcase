@@ -166,7 +166,7 @@ const Landing = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-1 text-foreground">Current Role</h3>
-                      <p className="text-muted-foreground">Principal Member of Technical Staff at Oracle</p>
+                      <p className="text-muted-foreground">Principal Platform Software Engineer at Oracle</p>
                     </div>
                   </div>
 

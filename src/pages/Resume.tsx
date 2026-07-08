@@ -31,44 +31,49 @@ const Resume = () => {
     const experience = [
         {
             company: "Oracle India",
-            role: "Principal Platform Software Engineer",
-            period: "September 2023 - Present",
+            period: "January 2021 - Present",
             location: "Bangalore, India",
             logo: OracleLogo,
-            highlights: [
-                "LangGraph Workflow Orchestration: Built a stateful orchestration layer for Oracle Analytics semantic modeling, translating user requests into phased execution plans and routing them across specialized subagents with checkpointed state, human-in-the-loop (HITL) interrupts, and retry/replan control flow.",
-                "Codex Plugin & Agent Runtime: Built a Codex plugin for Oracle Analytics with MCP-based tools and hooks, enabling natural-language-driven semantic-model workflows with execution guardrails, validation, and more reliable agent behavior.",
-                "AI Dataflow Assistant: Led development of an AI assistant from the ground up that enabled users to author Oracle Analytics dataflows using natural language.",
-                "LLM Context & Response Optimization: Engineered a Python-based communication layer and Python-like intermediate representation for complex dataflow state, reducing token usage and improving response quality for multi-step workflow generation.",
-                "AI Evaluation & Reliability: Built evaluation workflows and benchmarking harnesses to detect prompt regressions and validate response quality across paraphrased and multi-step user requests."
+            roles: [
+                {
+                    title: "Principal Platform Software Engineer",
+                    period: "September 2023 - Present",
+                    highlights: [
+                        "LangGraph Workflow Orchestration: Built a stateful orchestration layer for Oracle Analytics semantic modeling, translating user requests into phased execution plans and routing them across specialized subagents with checkpointed state, human-in-the-loop (HITL) interrupts, and retry/replan control flow.",
+                        "Codex Plugin & Agent Runtime: Built a Codex plugin for Oracle Analytics with MCP-based tools and hooks, enabling natural-language-driven semantic-model workflows with execution guardrails, validation, and more reliable agent behavior.",
+                        "AI Dataflow Assistant: Led development of an AI assistant from the ground up that enabled users to author Oracle Analytics dataflows using natural language.",
+                        "LLM Context & Response Optimization: Engineered a Python-based communication layer and Python-like intermediate representation for complex dataflow state, reducing token usage and improving response quality for multi-step workflow generation.",
+                        "AI Evaluation & Reliability: Built evaluation workflows and benchmarking harnesses to detect prompt regressions and validate response quality across paraphrased and multi-step user requests."
+                    ]
+                },
+                {
+                    title: "Senior Member of Technical Staff",
+                    period: "January 2021 - August 2023",
+                    highlights: [
+                        "Core Architecture Modernization: Overhauled the Semantic Modeler joins architecture and integrated Lucene-based search, significantly improving workspace object discovery and developer productivity.",
+                        "Scalable Undo/Redo & Selective Indexing: Designed a Git-backed undo/redo framework for Semantic Modeler with selective Lucene reindexing, reducing memory pressure and avoiding full-workspace restore costs.",
+                        "Performance & Engineering Rigor: Improved semantic-model responsiveness through targeted data-fetching optimizations and established a reusable JUnit test framework adopted across the team."
+                    ]
+                }
             ],
             products: ["Oracle Analytics Cloud", "Dataflows", "Semantic Model"],
             achievements: ["Consistently recognized as a Top Tier Performer with the highest annual performance rating (2023–2025)."]
         },
         {
-            company: "Oracle India",
-            role: "Senior Member of Technical Staff",
-            period: "January 2021 - August 2023",
-            location: "Bangalore, India",
-            logo: OracleLogo,
-            highlights: [
-                "Core Architecture Modernization: Overhauled the Semantic Modeler joins architecture and integrated Lucene-based search, significantly improving workspace object discovery and developer productivity.",
-                "Scalable Undo/Redo & Selective Indexing: Designed a Git-backed undo/redo framework for Semantic Modeler with selective Lucene reindexing, reducing memory pressure and avoiding full-workspace restore costs.",
-                "Performance & Engineering Rigor: Improved semantic-model responsiveness through targeted data-fetching optimizations and established a reusable JUnit test framework adopted across the team."
-            ],
-            products: ["Oracle Analytics Cloud", "Semantic Model"],
-            achievements: ["Consistently recognized as a Top Tier Performer with the highest annual performance rating."]
-        },
-        {
             company: "SAP Labs India",
-            role: "Developer → Associate Developer",
             period: "August 2015 - January 2021",
             location: "Bangalore, India",
             logo: SAPLogo,
-            highlights: [
-                "SaaS Product Engineering: Directed the full UI lifecycle for the Cloud Translation Service using Node.js and SAP UI5.",
-                "Distributed Systems: Developed resilient Java Spring Boot microservices deployed on SAP Cloud Foundry.",
-                "Technical Leadership: Served as the primary technical lead for global customer escalations, resolving critical root causes for Fortune 500 clients."
+            roles: [
+                {
+                    title: "Developer → Associate Developer",
+                    period: "August 2015 - January 2021",
+                    highlights: [
+                        "SaaS Product Engineering: Directed the full UI lifecycle for the Cloud Translation Service using Node.js and SAP UI5.",
+                        "Distributed Systems: Developed resilient Java Spring Boot microservices deployed on SAP Cloud Foundry.",
+                        "Technical Leadership: Served as the primary technical lead for global customer escalations, resolving critical root causes for Fortune 500 clients."
+                    ]
+                }
             ],
             products: ["SAP Analytics Cloud", "SAP Lumira Discovery"],
             achievements: ["VP Award for Translation Service contributions"]
@@ -180,14 +185,15 @@ const Resume = () => {
                                 Professional Summary
                             </h3>
                             <p className="text-muted-foreground text-lg leading-relaxed">
-                                As a Principal Member of Technical Staff at Oracle with over 10 years of experience,
-                                I specialize in architecting and developing AI-driven solutions that solve complex business problems.
-                                My journey spans from building scalable cloud-based systems to pioneering the integration of
-                                advanced AI technologies in enterprise software.
+                                As a Principal Platform Software Engineer at Oracle with over 10 years of experience, 
+                                I architect and build enterprise AI solutions, stateful multi-agent workflows, and LLM-powered platform capabilities. 
+                                My journey spans from building scalable distributed cloud architectures to pioneering the integration of 
+                                advanced agentic systems in business applications.
                             </p>
                             <p className="text-muted-foreground text-lg leading-relaxed">
-                                Currently pursuing a Master's degree in Computer Science with specialization in Artificial Intelligence
-                                at Georgia Institute of Technology, I'm deepening my expertise in cutting-edge AI and NLP technologies.
+                                I hold a Master's degree in Computer Science with an Artificial Intelligence specialization 
+                                from the Georgia Institute of Technology, graduated with a perfect 4.0 / 4.0 GPA. My academic and 
+                                applied engineering research focuses on advanced NLP, knowledge-based AI, and autonomous agent orchestration.
                             </p>
                         </div>
 
@@ -243,43 +249,56 @@ const Resume = () => {
                             <Card key={index} className="portfolio-card p-8">
                                 <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                                     <div className="lg:w-full">
-                                        <div className="flex items-start justify-between mb-4">
+                                        {/* Company Header */}
+                                        <div className="flex items-center justify-between mb-6 border-b border-border pb-4">
                                             <div>
-                                                <h4 className="text-2xl font-bold text-foreground mb-2">{exp.role}</h4>
-                                                <p className="text-xl text-primary font-semibold mb-1">{exp.company}</p>
-                                                <p className="text-muted-foreground">{exp.period}</p>
+                                                <p className="text-2xl text-primary font-bold">{exp.company}</p>
+                                                <p className="text-muted-foreground text-sm">{exp.location} &bull; {exp.period}</p>
                                             </div>
                                             <exp.logo className="w-16 h-auto text-primary flex-shrink-0" />
                                         </div>
 
-                                        <div className="space-y-4">
+                                        {/* Nested Roles list */}
+                                        <div className="space-y-8">
+                                            {exp.roles.map((role, rIdx) => (
+                                                <div key={rIdx} className="relative pl-6 border-l border-primary/20 last:border-l-transparent">
+                                                    {/* Timeline node */}
+                                                    <div className="absolute -left-[5px] top-1.5 w-[10px] h-[10px] rounded-full bg-primary" />
+                                                    
+                                                    <div className="mb-3">
+                                                        <h4 className="text-xl font-bold text-foreground">{role.title}</h4>
+                                                        <p className="text-sm text-muted-foreground">{role.period}</p>
+                                                    </div>
+
+                                                    <ul className="space-y-2">
+                                                        {role.highlights.map((highlight, idx) => (
+                                                            <li key={idx} className="flex items-start">
+                                                                <div className="w-1.5 h-1.5 bg-primary/60 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                                                <span className="text-muted-foreground text-sm">{highlight}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Products and Achievements */}
+                                        <div className="mt-6 pt-4 border-t border-border space-y-4">
                                             <div>
-                                                <p className="font-semibold text-foreground mb-2">Key Products:</p>
+                                                <p className="font-semibold text-foreground text-sm mb-2">Key Products:</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     {exp.products.map((product, idx) => (
-                                                        <Badge key={idx} variant="secondary">{product}</Badge>
+                                                        <Badge key={idx} variant="secondary" className="text-xs">{product}</Badge>
                                                     ))}
                                                 </div>
                                             </div>
 
-                                            <div>
-                                                <p className="font-semibold text-foreground mb-3">Key Achievements:</p>
-                                                <ul className="space-y-2">
-                                                    {exp.highlights.map((highlight, idx) => (
-                                                        <li key={idx} className="flex items-start">
-                                                            <div className="w-2 h-2 bg-primary rounded-full mt-3 mr-3 flex-shrink-0"></div>
-                                                            <span className="text-muted-foreground">{highlight}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
                                             {exp.achievements && (
-                                                <div className="pt-4 border-t border-border">
-                                                    <p className="font-semibold text-foreground mb-2">Recognition:</p>
+                                                <div>
+                                                    <p className="font-semibold text-foreground text-sm mb-2">Recognition:</p>
                                                     <div className="flex flex-wrap gap-2">
                                                         {exp.achievements.map((achievement, idx) => (
-                                                            <Badge key={idx} className="bg-primary/20 text-primary border-primary/30">
+                                                            <Badge key={idx} className="bg-primary/20 text-primary border-primary/30 text-xs">
                                                                 <Award className="w-3 h-3 mr-1" />
                                                                 {achievement}
                                                             </Badge>
